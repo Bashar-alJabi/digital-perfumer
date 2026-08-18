@@ -149,6 +149,7 @@ export default function ProjectsSection() {
 	const [activeTab, setActiveTab] = useState<"professional" | "personal">(
 		"professional",
 	);
+	const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
 	const targetRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
 	const [scrollDistance, setScrollDistance] = useState(0);
@@ -161,15 +162,14 @@ export default function ProjectsSection() {
 			if (trackRef.current) {
 				const totalTrackWidth = trackRef.current.scrollWidth;
 				const viewportWidth = window.innerWidth;
-				setScrollDistance(totalTrackWidth - viewportWidth + 48);
+				setScrollDistance(Math.max(0, totalTrackWidth - viewportWidth + 48));
 			}
 		};
 
 		calculateScrollDistance();
 		window.addEventListener("resize", calculateScrollDistance);
-		return () =>
-			window.removeEventListener("resize", calculateScrollDistance);
-	}, [activeTab, filteredProjects]);
+		return () => window.removeEventListener("resize", calculateScrollDistance);
+	}, [activeTab, filteredProjects.length]);
 
 	const { scrollYProgress } = useScroll({
 		target: targetRef,
@@ -177,8 +177,13 @@ export default function ProjectsSection() {
 
 	const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
 
+	const handleImageError = (id: string) => {
+		setImgErrors((prev) => ({ ...prev, [id]: true }));
+	};
+
 	// Priority image selector: Custom image -> Live Screenshot API -> Gradient fallback
 	const getProjectImage = (project: Project) => {
+		if (imgErrors[project.id]) return null;
 		if (project.customImage) return project.customImage;
 		if (project.link && !project.link.includes("github.com")) {
 			return `https://s0.wp.com/mshots/v1/${encodeURIComponent(project.link)}?w=800&h=500`;
@@ -208,34 +213,25 @@ export default function ProjectsSection() {
 					<div className="flex items-center gap-2 p-1.5 rounded-full bg-perfume-surface border border-perfume-soft/80 shadow-sm">
 						<button
 							onClick={() => setActiveTab("professional")}
-							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans ${
+							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans cursor-pointer ${
 								activeTab === "professional"
 									? "bg-perfume-primary text-white shadow-md"
 									: "text-perfume-text/70 hover:text-perfume-text"
 							}`}
 						>
 							Professional (
-							{
-								allProjects.filter(
-									(p) => p.type === "professional",
-								).length
-							}
-							)
+							{allProjects.filter((p) => p.type === "professional").length})
 						</button>
 						<button
 							onClick={() => setActiveTab("personal")}
-							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans ${
+							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans cursor-pointer ${
 								activeTab === "personal"
 									? "bg-perfume-primary text-white shadow-md"
 									: "text-perfume-text/70 hover:text-perfume-text"
 							}`}
 						>
 							Personal (
-							{
-								allProjects.filter((p) => p.type === "personal")
-									.length
-							}
-							)
+							{allProjects.filter((p) => p.type === "personal").length})
 						</button>
 					</div>
 				</div>
@@ -251,32 +247,30 @@ export default function ProjectsSection() {
 							const imageSrc = getProjectImage(project);
 
 							return (
-								<a
+								<div
 									key={project.id}
-									href={project.link || "#"}
-									target={project.link ? "_blank" : "_self"}
-									rel="noopener noreferrer"
 									className="group relative w-[85vw] sm:w-105 md:w-120 shrink-0 rounded-3xl border border-perfume-soft bg-perfume-surface p-5 md:p-6 overflow-hidden shadow-sm hover:border-perfume-primary/50 transition-all duration-300 flex flex-col justify-between"
 								>
 									{/* Image Container */}
-									<div className="relative w-full h-50 md:h-60 rounded-2xl overflow-hidden mb-4 border border-perfume-soft/50 bg-perfume-bg">
+									<div className="relative w-full h-48 md:h-60 rounded-2xl overflow-hidden mb-4 border border-perfume-soft/50 bg-perfume-bg">
 										{imageSrc ? (
 											<img
 												src={imageSrc}
 												alt={project.title}
+												onError={() => handleImageError(project.id)}
 												className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
 												loading="lazy"
 											/>
 										) : (
-											<div className="w-full h-full bg-liner-to-br from-rose-950/20 via-perfume-soft/40 to-perfume-surface flex items-center justify-center">
+											<div className="w-full h-full bg-linear-to-br from-rose-950/20 via-perfume-soft/40 to-perfume-surface flex items-center justify-center">
 												<span className="text-4xl font-serif text-perfume-primary/40">
-													{project.id}
+													/{project.id}
 												</span>
 											</div>
 										)}
 
 										{/* Tech Stack Chips Overlay */}
-										<div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10">
+										<div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
 											{project.tags.map((tag) => (
 												<span
 													key={tag}
@@ -288,31 +282,78 @@ export default function ProjectsSection() {
 										</div>
 
 										{/* External Link Indicator */}
-										<div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs">
-											↗
-										</div>
+										{project.link && (
+											<a
+												href={project.link}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 text-xs hover:bg-perfume-primary"
+												aria-label={`Visit ${project.title}`}
+											>
+												↗
+											</a>
+										)}
 									</div>
 
 									{/* Card Main Body */}
-									<div>
-										<div className="flex justify-between items-center mb-1.5">
-											<span className="text-xs uppercase tracking-[0.25em] font-medium text-perfume-primary font-sans">
-												{project.category}
-											</span>
-											<span className="text-xs font-mono text-perfume-text/40">
-												/{project.id}
-											</span>
+									<div className="flex flex-col flex-1 justify-between">
+										<div>
+											<div className="flex justify-between items-center mb-1.5">
+												<span className="text-xs uppercase tracking-[0.25em] font-medium text-perfume-primary font-sans">
+													{project.category}
+												</span>
+												<span className="text-xs font-mono text-perfume-text/40">
+													/{project.id}
+												</span>
+											</div>
+
+											<h3 className="text-xl md:text-2xl font-serif font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
+												{project.link ? (
+													<a
+														href={project.link}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="hover:underline"
+													>
+														{project.title}
+													</a>
+												) : (
+													project.title
+												)}
+											</h3>
+
+											<p className="text-xs md:text-sm font-light text-perfume-text/75 leading-relaxed font-sans line-clamp-2 mb-4">
+												{project.description}
+											</p>
 										</div>
 
-										<h3 className="text-xl md:text-2xl font-serif font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
-											{project.title}
-										</h3>
-
-										<p className="text-xs md:text-sm font-light text-perfume-text/75 leading-relaxed font-sans line-clamp-2">
-											{project.description}
-										</p>
+										{/* Action Links (Live / Code) */}
+										<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 text-xs font-mono">
+											{project.link && (
+												<a
+													href={project.link}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-perfume-primary hover:underline flex items-center gap-1"
+												>
+													<span>Live Site</span>
+													<span>↗</span>
+												</a>
+											)}
+											{project.codeLink && (
+												<a
+													href={project.codeLink}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-perfume-text/60 hover:text-perfume-text hover:underline flex items-center gap-1 ml-auto"
+												>
+													<span>Source Code</span>
+													<span>↗</span>
+												</a>
+											)}
+										</div>
 									</div>
-								</a>
+								</div>
 							);
 						})}
 					</motion.div>

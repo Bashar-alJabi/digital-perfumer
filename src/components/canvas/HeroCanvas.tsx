@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 const vertexShader = `
@@ -15,23 +15,21 @@ const vertexShader = `
     vNoteIndex = aNoteIndex;
     vec3 pos = position;
 
-    // Subtle organic fluid motion
-    float waveX = sin(uTime * 0.3 + pos.y * 1.0) * 0.2;
-    float waveY = cos(uTime * 0.25 + pos.x * 0.8) * 0.2;
+    // Organic wave motion
+    float waveX = sin(uTime * 0.3 + pos.y * 1.0) * 0.25;
+    float waveY = cos(uTime * 0.25 + pos.x * 0.8) * 0.25;
     pos.x += waveX;
     pos.y += waveY;
 
-    // Gentle cursor repulsion
+    // Cursor repulsion
     vec2 dir = pos.xy - uMouse;
     float dist = length(dir);
-    if (dist < 2.0) {
-      pos.xy += normalize(dir) * (2.0 - dist) * 0.1;
+    if (dist < 2.5) {
+      pos.xy += normalize(dir) * (2.5 - dist) * 0.15;
     }
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-    
-    // Reduced particle rendering scale for subtle appearance
-    gl_PointSize = aScale * (100.0 / -mvPosition.z);
+    gl_PointSize = aScale * (120.0 / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
@@ -45,10 +43,10 @@ const fragmentShader = `
 
     float alpha = smoothstep(0.5, 0.0, dist);
 
-    // Perfume palette: Primary (#F36371), Soft Pink (#FFD8DF), Black (#000000)
+    // Color definitions
     vec3 primaryColor = vec3(0.953, 0.388, 0.443);
     vec3 softAccent = vec3(1.0, 0.847, 0.874);
-    vec3 blackNote = vec3(0.0, 0.0, 0.0);
+    vec3 blackNote = vec3(0.1, 0.1, 0.1);
 
     vec3 finalColor = primaryColor;
     if (vNoteIndex > 0.5 && vNoteIndex < 1.5) {
@@ -57,17 +55,28 @@ const fragmentShader = `
       finalColor = blackNote;
     }
 
-    // Lower opacity (0.35) so text remains ultra-readable
-    gl_FragColor = vec4(finalColor, alpha * 0.35);
+    gl_FragColor = vec4(finalColor, alpha * 0.4);
   }
 `;
 
 function ParticleNotes() {
 	const meshRef = useRef<THREE.Points>(null!);
 	const mouseRef = useRef<[number, number]>([0, 0]);
+	const targetMouseRef = useRef<[number, number]>([0, 0]);
 
-	// Reduced particle count for a lighter, breathable aesthetic
-	const count = 400;
+	const count = 450;
+
+	// Global window mouse listener for smooth interactions
+	useEffect(() => {
+		const handleMouseMove = (event: MouseEvent) => {
+			const x = (event.clientX / window.innerWidth) * 2 - 1;
+			const y = -(event.clientY / window.innerHeight) * 2 + 1;
+			targetMouseRef.current = [x * 5, y * 3];
+		};
+
+		window.addEventListener("mousemove", handleMouseMove);
+		return () => window.removeEventListener("mousemove", handleMouseMove);
+	}, []);
 
 	const { positions, scales, noteIndices } = useMemo(() => {
 		const pos = new Float32Array(count * 3);
@@ -75,12 +84,11 @@ function ParticleNotes() {
 		const indices = new Float32Array(count);
 
 		for (let i = 0; i < count; i++) {
-			// Wider distribution to keep the center clean for typography
-			pos[i * 3] = (Math.random() - 0.5) * 11;
-			pos[i * 3 + 1] = (Math.random() - 0.5) * 7;
-			pos[i * 3 + 2] = (Math.random() - 0.5) * 3;
+			pos[i * 3] = (Math.random() - 0.5) * 12;
+			pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+			pos[i * 3 + 2] = (Math.random() - 0.5) * 4;
 
-			sc[i] = Math.random() * 0.7 + 0.2;
+			sc[i] = Math.random() * 0.8 + 0.3;
 			indices[i] = i % 3;
 		}
 
@@ -96,35 +104,31 @@ function ParticleNotes() {
 	);
 
 	useFrame((state) => {
-		const { clock, pointer } = state;
+		const { clock } = state;
 		if (meshRef.current) {
 			const material = meshRef.current.material as THREE.ShaderMaterial;
 			material.uniforms.uTime.value = clock.getElapsedTime();
 
+			// Smooth linear interpolation (lerp) for mouse reaction
 			mouseRef.current[0] +=
-				(pointer.x * 4.0 - mouseRef.current[0]) * 0.03;
+				(targetMouseRef.current[0] - mouseRef.current[0]) * 0.05;
 			mouseRef.current[1] +=
-				(pointer.y * 3.0 - mouseRef.current[1]) * 0.03;
+				(targetMouseRef.current[1] - mouseRef.current[1]) * 0.05;
+
 			material.uniforms.uMouse.value.set(
 				mouseRef.current[0],
 				mouseRef.current[1],
 			);
 
-			meshRef.current.rotation.y = clock.getElapsedTime() * 0.01;
+			meshRef.current.rotation.y = clock.getElapsedTime() * 0.015;
 		}
 	});
 
 	return (
 		<points ref={meshRef}>
 			<bufferGeometry>
-				<bufferAttribute
-					attach="attributes-position"
-					args={[positions, 3]}
-				/>
-				<bufferAttribute
-					attach="attributes-aScale"
-					args={[scales, 1]}
-				/>
+				<bufferAttribute attach="attributes-position" args={[positions, 3]} />
+				<bufferAttribute attach="attributes-aScale" args={[scales, 1]} />
 				<bufferAttribute
 					attach="attributes-aNoteIndex"
 					args={[noteIndices, 1]}

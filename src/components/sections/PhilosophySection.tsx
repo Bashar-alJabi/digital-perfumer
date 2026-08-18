@@ -55,9 +55,7 @@ export default function PhilosophySection() {
 						<h2 className="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-normal leading-[0.95] tracking-tight text-perfume-text">
 							I don&apos;t build
 							<br />
-							<span className="text-perfume-text/40">
-								websites.
-							</span>
+							<span className="text-perfume-text/40">websites.</span>
 							<br />
 							I compose
 							<br />
@@ -90,8 +88,7 @@ export default function PhilosophySection() {
 									{/* Unified Signature Dots with Active Card Highlight */}
 									<div className="mb-8 flex items-center gap-4">
 										{signatureDots.map((dot, dotIndex) => {
-											const isActive =
-												dotIndex === cardIndex;
+											const isActive = dotIndex === cardIndex;
 											return (
 												<span
 													key={dot.title}

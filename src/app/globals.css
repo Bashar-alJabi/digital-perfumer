@@ -167,6 +167,10 @@
 	--accent-soft: #ffd8df;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	background-color: var(--bg-perfume);
 	color: var(--text-perfume);
@@ -186,3 +190,11 @@ body {
 	background: var(--primary-perfume);
 	color: white;
 }
+/* 
+@media (pointer: fine) {
+	body,
+	a,
+	button {
+		cursor: none !important;
+	}
+} */
