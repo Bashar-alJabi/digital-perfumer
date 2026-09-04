@@ -89,14 +89,14 @@ export default function Navbar() {
 				>
 					{/* Logo / Brand Essence */}
 					<a href="#" className="flex items-center gap-3 group">
-						<div className="w-8 h-8 rounded-full bg-perfume-primary/10 border border-perfume-primary/30 flex items-center justify-center text-perfume-primary font-serif font-bold text-xs group-hover:scale-105 transition-transform duration-300">
+						<div className="w-8 h-8 rounded-full bg-perfume-primary/10 border border-perfume-primary/30 flex items-center justify-center text-perfume-primary font-bold dp-label group-hover:scale-105 transition-transform duration-300">
 							B
 						</div>
 						<div className="flex flex-col">
 							<span className="font-serif text-base tracking-tight font-medium text-perfume-text group-hover:text-perfume-primary transition-colors duration-300">
 								Bashar
 							</span>
-							<span className="text-[9px] font-mono tracking-widest text-perfume-text/50 uppercase -mt-1">
+							<span className="dp-label tracking-widest text-perfume-text/50 uppercase -mt-1">
 								Eau De Code
 							</span>
 						</div>
@@ -113,7 +113,7 @@ export default function Navbar() {
 									href={link.href}
 									onMouseEnter={() => setActiveHover(link.name)}
 									onMouseLeave={() => setActiveHover(null)}
-									className="relative px-4 py-1.5 rounded-full text-xs font-sans tracking-wide text-perfume-text/80 hover:text-perfume-text transition-colors duration-300 flex items-center gap-1.5"
+									className="relative px-4 py-1.5 rounded-full dp-small tracking-wide text-perfume-text/80 hover:text-perfume-text transition-colors duration-300 flex items-center gap-1.5"
 								>
 									{isHovered && (
 										<motion.div
@@ -127,7 +127,7 @@ export default function Navbar() {
 										/>
 									)}
 
-									<span className="text-[9px] font-mono text-perfume-primary opacity-70">
+									<span className="dp-label text-perfume-primary opacity-70">
 										[{link.noteLabel}]
 									</span>
 									<span>{link.name}</span>
@@ -138,17 +138,17 @@ export default function Navbar() {
 
 					{/* Right Action & Status Badge */}
 					<div className="hidden sm:flex items-center gap-4">
-						<div className="flex items-center gap-2 text-xs font-mono text-perfume-text/60">
+						<div className="flex items-center gap-2 dp-label text-perfume-text/60">
 							<span className="relative flex h-2 w-2">
 								<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
 								<span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
 							</span>
-							<span className="text-[11px]">Available</span>
+							<span className="dp-label">Available</span>
 						</div>
 
 						<a
 							href="#contact"
-							className="px-5 py-2 rounded-full bg-perfume-text text-perfume-bg text-xs font-medium tracking-wide hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-sm"
+							className="px-5 py-2 rounded-full bg-perfume-text text-perfume-bg dp-small font-medium tracking-wide hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-sm"
 						>
 							Inquire Accord →
 						</a>
@@ -187,10 +187,10 @@ export default function Navbar() {
 									key={link.name}
 									href={link.href}
 									onClick={() => setIsMobileMenuOpen(false)}
-									className="flex items-center justify-between p-3 rounded-xl border border-perfume-soft/40 bg-perfume-bg/50 text-sm font-serif text-perfume-text hover:border-perfume-primary/40 transition-colors"
+									className="flex items-center justify-between p-3 rounded-xl border border-perfume-soft/40 bg-perfume-bg/50 dp-small text-perfume-text hover:border-perfume-primary/40 transition-colors"
 								>
 									<span>{link.name}</span>
-									<span className="text-xs font-mono text-perfume-primary">
+									<span className="dp-label text-perfume-primary">
 										[{link.noteLabel}]
 									</span>
 								</a>
@@ -199,7 +199,7 @@ export default function Navbar() {
 							<a
 								href="#contact"
 								onClick={() => setIsMobileMenuOpen(false)}
-								className="w-full text-center py-3 rounded-xl bg-perfume-text text-perfume-bg font-sans font-medium text-xs tracking-wider"
+								className="w-full text-center py-3 rounded-xl bg-perfume-text text-perfume-bg font-medium dp-small tracking-wider"
 							>
 								Inquire Accord →
 							</a>

@@ -95,7 +95,8 @@ export default function HeroSection() {
 				{/* Title */}
 				<h1
 					ref={titleRef}
-					className="text-5xl md:text-8xl lg:text-9xl font-serif font-normal tracking-tight leading-[1.02] mb-6 text-perfume-text drop-shadow-sm"
+					// className="text-5xl md:text-8xl lg:text-9xl font-serif font-normal tracking-tight leading-[1.02] mb-6 text-perfume-text drop-shadow-sm"
+					className="dp-hero-title font-normal tracking-tight leading-[1.02] mb-6 text-perfume-text drop-shadow-sm"
 				>
 					Digital Perfumer
 				</h1>
@@ -103,7 +104,8 @@ export default function HeroSection() {
 				{/* Tagline */}
 				<p
 					ref={taglineRef}
-					className="text-xs md:text-sm lg:text-base font-medium text-perfume-text/80 tracking-[0.3em] max-w-xl uppercase mb-10"
+					// className="text-xs md:text-sm lg:text-base font-medium text-perfume-text/80 tracking-[0.3em] max-w-xl uppercase mb-10"
+					className="dp-small font-medium text-perfume-text/80 tracking-[0.3em] max-w-xl uppercase mb-10"
 				>
 					Composing the Notes of Great Brands
 				</p>
@@ -112,13 +114,13 @@ export default function HeroSection() {
 				<div ref={ctaRef} className="flex items-center gap-4">
 					<a
 						href="#projects"
-						className="px-7 py-3 rounded-full bg-perfume-text text-perfume-bg text-xs font-medium tracking-wider uppercase hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+						className="px-7 py-3 rounded-full bg-perfume-text text-perfume-bg dp-small font-medium tracking-wider uppercase hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
 					>
 						Explore Accords
 					</a>
 					<a
 						href="#philosophy"
-						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text text-xs font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
+						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text dp-small font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
 					>
 						Read Philosophy
 					</a>
@@ -128,9 +130,9 @@ export default function HeroSection() {
 			{/* Scroll Indicator */}
 			<div
 				ref={scrollRef}
-				className="z-10 flex flex-col items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-perfume-text/50"
+				className="z-10 flex flex-col items-center gap-2 dp-label tracking-widest uppercase text-perfume-text/50"
 			>
-				<span>Scroll to Discover</span>
+				{/* <span>Scroll to Discover</span> */}
 				<div className="w-4 h-7 rounded-full border border-perfume-text/30 flex justify-center p-1">
 					<div className="w-1 h-1.5 rounded-full bg-perfume-primary animate-bounce" />
 				</div>

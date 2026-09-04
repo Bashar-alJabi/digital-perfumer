@@ -132,17 +132,18 @@ export default function TechStackSection() {
 				{/* Section Header */}
 				<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20">
 					<div>
-						<p className="text-xs uppercase tracking-[0.4em] font-semibold text-perfume-text/60 font-sans">
+						<p className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
 							[ Raw Ingredients & Tools ]
 						</p>
-						<h2 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-serif font-normal text-perfume-text leading-tight">
+						{/* <h2 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-serif font-normal text-perfume-text leading-tight"> */}
+						<h2 className="mt-4 dp-section-title font-normal text-perfume-text leading-tight">
 							The Digital <br />
 							<span className="italic text-perfume-primary">
 								Formulation Cabinet
 							</span>
 						</h2>
 					</div>
-					<p className="text-sm md:text-base font-light text-perfume-text/75 max-w-md font-sans leading-relaxed">
+					<p className="dp-body font-light text-perfume-text/75 max-w-md leading-relaxed">
 						Every creation requires precise raw materials. Here is the technical
 						inventory used to craft memorable digital products.
 					</p>
@@ -167,7 +168,7 @@ export default function TechStackSection() {
 								>
 									<div className="flex items-center gap-4">
 										<span
-											className={`text-xs font-mono transition-colors duration-300 ${
+											className={`dp-label transition-colors duration-300 ${
 												isActive
 													? "text-perfume-primary font-bold"
 													: "text-perfume-text/40"
@@ -176,10 +177,10 @@ export default function TechStackSection() {
 											{group.code}
 										</span>
 										<div>
-											<h3 className="text-base md:text-lg font-serif text-perfume-text">
+											<h3 className="dp-small text-perfume-text">
 												{group.categoryTitle}
 											</h3>
-											<p className="text-xs font-light text-perfume-text/60 font-sans mt-0.5">
+											<p className="dp-label font-light text-perfume-text/60 mt-0.5">
 												{group.skills.length} Ingredients
 											</p>
 										</div>
@@ -208,22 +209,22 @@ export default function TechStackSection() {
 								animate={{ opacity: 1, x: 0 }}
 								exit={{ opacity: 0, x: -20 }}
 								transition={{ duration: 0.35, ease: "easeOut" }}
-								className="rounded-3xl border border-perfume-soft bg-perfume-surface p-8 md:p-12 shadow-sm min-h-[420px] flex flex-col justify-between"
+								className="rounded-3xl border border-perfume-soft bg-perfume-surface p-8 md:p-12 shadow-sm min-h-105 flex flex-col justify-between"
 							>
 								<div>
 									{/* Category Meta Info */}
 									<div className="flex items-center justify-between border-b border-perfume-soft/50 pb-6 mb-8">
 										<div>
-											<span className="text-xs font-mono uppercase tracking-widest text-perfume-primary">
+											<span className="dp-label uppercase tracking-widest text-perfume-primary">
 												[{activeGroup.code}] Cabinet Record
 											</span>
-											<h3 className="text-2xl md:text-4xl font-serif text-perfume-text mt-1">
+											<h3 className="dp-card-title text-perfume-text mt-1">
 												{activeGroup.categoryTitle}
 											</h3>
 										</div>
 									</div>
 
-									<p className="text-sm md:text-base font-light text-perfume-text/80 font-sans mb-8 leading-relaxed">
+									<p className="dp-body font-light text-perfume-text/80 mb-8 leading-relaxed">
 										{activeGroup.description}
 									</p>
 
@@ -239,7 +240,7 @@ export default function TechStackSection() {
 											<motion.span
 												key={skill.name}
 												variants={itemVariants}
-												className={`inline-flex items-center gap-1.5 text-sm md:text-base font-sans px-4 py-2 rounded-xl transition-all duration-300 border ${
+												className={`inline-flex items-center gap-1.5 dp-small px-4 py-2 rounded-xl transition-all duration-300 border ${
 													skill.highlight
 														? "bg-perfume-primary/10 border-perfume-primary/50 text-perfume-text font-medium shadow-sm hover:border-perfume-primary"
 														: "bg-perfume-bg/80 border-perfume-soft/80 text-perfume-text/80 hover:border-perfume-soft"
@@ -257,7 +258,7 @@ export default function TechStackSection() {
 								</div>
 
 								{/* Cabinet Record Footer */}
-								<div className="mt-12 pt-6 border-t border-perfume-soft/40 flex items-center justify-between text-xs font-mono text-perfume-text/50">
+								<div className="mt-12 pt-6 border-t border-perfume-soft/40 flex items-center justify-between dp-label text-perfume-text/50">
 									<span>Selected Essence Category</span>
 									<span className="text-perfume-primary/80">
 										{activeGroup.subtitle}

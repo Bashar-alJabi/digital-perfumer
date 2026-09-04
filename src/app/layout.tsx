@@ -69,7 +69,7 @@ export default function RootLayout({
 			lang="en"
 			className={`${playfair.variable} ${inter.variable} bg-perfume-bg`}
 		>
-			<body className="font-sans antialiased">
+			<body className="antialiased">
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{

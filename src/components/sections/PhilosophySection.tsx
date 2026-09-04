@@ -48,11 +48,14 @@ export default function PhilosophySection() {
 						transition={{ duration: 1, ease: "easeOut" }}
 						className="lg:sticky lg:top-32 h-fit"
 					>
-						<p className="text-xs uppercase tracking-[0.4em] font-semibold text-perfume-text/60 font-sans">
+						<p className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
 							The Philosophy
 						</p>
 
-						<h2 className="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-normal leading-[0.95] tracking-tight text-perfume-text">
+						<h2
+							// className="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-normal leading-[0.95] tracking-tight text-perfume-text"
+							className="mt-8 dp-section-title font-normal leading-[0.95] tracking-tight text-perfume-text"
+						>
 							I don&apos;t build
 							<br />
 							<span className="text-perfume-text/40">websites.</span>
@@ -106,15 +109,15 @@ export default function PhilosophySection() {
 									</div>
 
 									{/* Card Content */}
-									<h3 className="text-3xl md:text-4xl font-serif font-normal text-perfume-text">
+									<h3 className="dp-card-title font-normal text-perfume-text">
 										{note.title}
 									</h3>
 
-									<p className="mt-2 text-xs md:text-sm font-medium uppercase tracking-[0.3em] text-perfume-primary font-sans">
+									<p className="mt-2 dp-small font-medium uppercase tracking-[0.3em] text-perfume-primary">
 										{note.subtitle}
 									</p>
 
-									<p className="mt-6 text-base md:text-lg max-w-md leading-relaxed font-light text-perfume-text/80 font-sans">
+									<p className="mt-6 dp-body max-w-md leading-relaxed font-light text-perfume-text/80">
 										{note.text}
 									</p>
 								</div>

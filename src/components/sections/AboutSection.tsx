@@ -24,7 +24,7 @@ export default function AboutSection() {
 				{/* Header Badge */}
 				<div className="flex items-center gap-3 mb-8">
 					<span className="w-1.5 h-1.5 rounded-full bg-perfume-primary" />
-					<span className="text-xs uppercase tracking-[0.4em] font-mono text-perfume-text/60">
+					<span className="dp-label uppercase tracking-[0.4em] text-perfume-text/60">
 						About The Creator
 					</span>
 				</div>
@@ -38,7 +38,10 @@ export default function AboutSection() {
 						transition={{ duration: 0.8 }}
 						className="lg:col-span-7"
 					>
-						<h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-normal leading-[1.08] tracking-tight text-perfume-text">
+						<h2
+							// className="text-4xl md:text-6xl lg:text-7xl font-serif font-normal leading-[1.08] tracking-tight text-perfume-text"
+							className="dp-section-title font-normal leading-[1.08] tracking-tight text-perfume-text"
+						>
 							Blending technical precision with <br />
 							<span className="italic font-light text-perfume-primary">
 								growth strategy.
@@ -51,7 +54,8 @@ export default function AboutSection() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, delay: 0.15 }}
-						className="lg:col-span-5 space-y-6 text-perfume-text/80 font-sans font-light text-base md:text-lg leading-relaxed"
+						// className="lg:col-span-5 space-y-6 text-perfume-text/80 font-sans font-light text-base md:text-lg leading-relaxed"
+						className="lg:col-span-5 space-y-6 text-perfume-text/80 font-light dp-body leading-relaxed"
 					>
 						<p>
 							I’m Bashar, a Full-Stack Web Developer and Digital Marketer. I
@@ -76,10 +80,10 @@ export default function AboutSection() {
 				>
 					{stats.map((stat, i) => (
 						<div key={i} className="space-y-1">
-							<span className="text-3xl md:text-5xl font-serif text-perfume-text font-normal">
+							<span className="dp-card-title text-perfume-text font-normal">
 								{stat.value}
 							</span>
-							<p className="text-xs font-mono uppercase tracking-wider text-perfume-text/60">
+							<p className="dp-label uppercase tracking-wider text-perfume-text/60">
 								{stat.label}
 							</p>
 						</div>

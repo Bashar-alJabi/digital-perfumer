@@ -95,10 +95,11 @@ export default function ContactSection() {
 						className="lg:col-span-5 space-y-10"
 					>
 						<div>
-							<p className="text-xs uppercase tracking-[0.4em] font-semibold text-perfume-text/60 font-sans">
+							<p className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
 								The Final Trail
 							</p>
-							<h2 className="mt-4 text-4xl md:text-6xl font-serif font-normal text-perfume-text leading-tight">
+							{/* <h2 className="mt-4 text-4xl md:text-6xl font-serif font-normal text-perfume-text leading-tight"> */}
+							<h2 className="mt-4 dp-section-title font-normal text-perfume-text leading-tight">
 								Let&apos;s compose your <br />
 								<span className="italic text-perfume-primary">
 									signature scent.
@@ -106,7 +107,7 @@ export default function ContactSection() {
 							</h2>
 						</div>
 
-						<p className="text-base md:text-lg font-light text-perfume-text/80 font-sans leading-relaxed">
+						<p className="dp-body font-light text-perfume-text/80 leading-relaxed">
 							Every iconic brand experience begins with a meaningful
 							conversation. Reach out to discuss a new creation, strategic
 							campaign, or tailored web platform.
@@ -116,7 +117,7 @@ export default function ContactSection() {
 						<div className="space-y-6 pt-4 border-t border-perfume-soft/50">
 							{/* Email Link */}
 							<div>
-								<span className="text-xs font-mono uppercase tracking-widest text-perfume-text/50 block mb-1">
+								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-1">
 									Direct Inquiries
 								</span>
 								<a
@@ -129,10 +130,10 @@ export default function ContactSection() {
 
 							{/* Status / Availability Badge */}
 							<div>
-								<span className="text-xs font-mono uppercase tracking-widest text-perfume-text/50 block mb-2">
+								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-2">
 									Current Status
 								</span>
-								<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-perfume-surface border border-perfume-soft text-xs font-sans text-perfume-text">
+								<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-perfume-surface border border-perfume-soft dp-label text-perfume-text">
 									<span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
 									<span>Available for Q3/Q4 Bespoke Projects</span>
 								</div>
@@ -140,7 +141,7 @@ export default function ContactSection() {
 
 							{/* Social Channels with Icons */}
 							<div className="pt-2">
-								<span className="text-xs font-mono uppercase tracking-widest text-perfume-text/50 block mb-3">
+								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-3">
 									Digital Footprint
 								</span>
 								<div className="flex items-center gap-3">
@@ -174,10 +175,10 @@ export default function ContactSection() {
 							{state.succeeded ? (
 								<div className="py-16 text-center space-y-4">
 									<span className="text-4xl block">✨</span>
-									<h3 className="text-2xl md:text-3xl font-serif text-perfume-text">
+									<h3 className="dp-card-title text-perfume-text">
 										Formulation Received
 									</h3>
-									<p className="text-sm md:text-base font-light text-perfume-text/75 max-w-md mx-auto font-sans">
+									<p className="dp-body font-light text-perfume-text/75 max-w-md mx-auto">
 										Thank you for reaching out. Your message has been safely
 										logged, and I will get back to you shortly.
 									</p>
@@ -193,7 +194,7 @@ export default function ContactSection() {
 												message: "",
 											});
 										}}
-										className="mt-6 text-xs font-mono uppercase tracking-widest text-perfume-primary underline underline-offset-4 cursor-pointer"
+										className="mt-6 dp-label uppercase tracking-widest text-perfume-primary underline underline-offset-4 cursor-pointer"
 									>
 										Send Another Note
 									</button>
@@ -202,7 +203,7 @@ export default function ContactSection() {
 								<form onSubmit={handleSubmit} className="space-y-8">
 									{/* Service Accord Selection */}
 									<div>
-										<label className="text-xs font-mono uppercase tracking-widest text-perfume-text/60 block mb-3">
+										<label className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-3">
 											Select Desired Accord
 										</label>
 										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -220,7 +221,7 @@ export default function ContactSection() {
 																selectedService: option.label,
 															}))
 														}
-														className={`p-3.5 rounded-xl border text-left text-xs md:text-sm font-sans transition-all duration-300 cursor-pointer ${
+														className={`p-3.5 rounded-xl border text-left dp-label transition-all duration-300 cursor-pointer ${
 															isSelected
 																? "border-perfume-primary bg-perfume-bg text-perfume-text font-medium shadow-sm"
 																: "border-perfume-soft/60 bg-perfume-bg/40 text-perfume-text/70 hover:border-perfume-primary/30"
@@ -242,7 +243,7 @@ export default function ContactSection() {
 									<div>
 										<label
 											htmlFor="contact-name"
-											className="text-xs font-mono uppercase tracking-widest text-perfume-text/60 block mb-2"
+											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
 											Your Name
 										</label>
@@ -254,7 +255,7 @@ export default function ContactSection() {
 											placeholder="e.g. Julian Vance"
 											value={formData.name}
 											onChange={handleInputChange}
-											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 text-sm font-sans text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
+											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
 										/>
 									</div>
 
@@ -262,7 +263,7 @@ export default function ContactSection() {
 									<div>
 										<label
 											htmlFor="contact-email"
-											className="text-xs font-mono uppercase tracking-widest text-perfume-text/60 block mb-2"
+											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
 											Your Email Address
 										</label>
@@ -274,7 +275,7 @@ export default function ContactSection() {
 											placeholder="julian@brand.com"
 											value={formData.email}
 											onChange={handleInputChange}
-											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 text-sm font-sans text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
+											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
 										/>
 										<ValidationError
 											prefix="Email"
@@ -287,7 +288,7 @@ export default function ContactSection() {
 									<div>
 										<label
 											htmlFor="contact-message"
-											className="text-xs font-mono uppercase tracking-widest text-perfume-text/60 block mb-2"
+											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
 											Project Vision & Details
 										</label>
@@ -299,7 +300,7 @@ export default function ContactSection() {
 											placeholder="Describe your vision, goals, or timeline..."
 											value={formData.message}
 											onChange={handleInputChange}
-											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 text-sm font-sans text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300 resize-none"
+											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300 resize-none"
 										/>
 										<ValidationError
 											prefix="Message"
@@ -320,7 +321,7 @@ export default function ContactSection() {
 										type="submit"
 										// disabled={isSubmitting}
 										disabled={state.submitting}
-										className="w-full py-4 rounded-xl bg-perfume-text text-perfume-bg hover:bg-perfume-primary hover:text-white disabled:opacity-50 transition-all duration-500 font-sans font-medium text-sm md:text-base tracking-wide shadow-md flex items-center justify-center gap-2 cursor-pointer"
+										className="w-full py-4 rounded-xl bg-perfume-text text-perfume-bg hover:bg-perfume-primary hover:text-white disabled:opacity-50 transition-all duration-500 font-medium dp-small tracking-wide shadow-md flex items-center justify-center gap-2 cursor-pointer"
 									>
 										{/* {isSubmitting ? ( */}
 										{state.submitting ? (

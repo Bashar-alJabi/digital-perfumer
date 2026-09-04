@@ -10,7 +10,7 @@ import TechStackSection from "@/components/sections/TechStackSection";
 
 export default function Home() {
 	return (
-		<main className="min-h-screen bg-perfume-bg text-perfume-text font-sans selection:bg-perfume-primary selection:text-white">
+		<main className="min-h-screen bg-perfume-bg text-perfume-text selection:bg-perfume-primary selection:text-white">
 			<CustomCursor />
 			{/* Floating Capsule Navbar */}
 			<Navbar />

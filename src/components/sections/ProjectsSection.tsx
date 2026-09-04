@@ -98,7 +98,7 @@ const allProjects: Project[] = [
 	{
 		id: "08",
 		title: "INBS Websites",
-		category: "",
+		category: "Businessmen Services Platform",
 		description: "",
 		tags: ["React", "Tailwind CSS", "Shadcn UI", "Motion.dev"],
 		link: "https://inbs-uae.com/",
@@ -124,7 +124,7 @@ const allProjects: Project[] = [
 		category: "Personal Portfolio",
 		description:
 			"Personal portfolio website designed and developed to showcase creative development, digital experiences, and selected projects.",
-		tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+		tags: ["HTML", "Css", "JavaScript"],
 		link: "https://bashar-aljabi.vercel.app/",
 		codeLink: "https://github.com/Bashar-alJabi/Portfolio",
 		customImage: "/projects/portfolio.webp",
@@ -144,17 +144,6 @@ const allProjects: Project[] = [
 	},
 	{
 		id: "P3",
-		title: "ClickMart",
-		category: "E-Commerce Application",
-		description:
-			"Interactive digital shopping app featuring modern cart state management, product filters, and responsive design.",
-		tags: ["React", "TypeScript", "Tailwind", "Shadcn UI"],
-		codeLink: "https://github.com/Bashar-alJabi/ClickMart",
-		customImage: "/projects/clickmart.webp",
-		type: "personal",
-	},
-	{
-		id: "P4",
 		title: "Windows",
 		category: "OS Interface Web Preview",
 		description:
@@ -163,6 +152,17 @@ const allProjects: Project[] = [
 		link: "https://windows-preview.vercel.app/",
 		codeLink: "https://github.com/Bashar-alJabi/Windows",
 		customImage: "/projects/windows.webp",
+		type: "personal",
+	},
+	{
+		id: "P4",
+		title: "ClickMart",
+		category: "E-Commerce Application",
+		description:
+			"Interactive digital shopping app featuring modern cart state management, product filters, and responsive design.",
+		tags: ["React", "TypeScript", "Tailwind", "Shadcn UI"],
+		codeLink: "https://github.com/Bashar-alJabi/ClickMart",
+		customImage: "/projects/clickmart.webp",
 		type: "personal",
 	},
 	{
@@ -251,10 +251,10 @@ export default function ProjectsSection() {
 				{/* Section Header & Tab Controls */}
 				<div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center justify-between gap-6 z-20">
 					<div>
-						<span className="text-xs uppercase tracking-[0.4em] font-semibold text-perfume-text/60 font-sans">
+						<span className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
 							[ Selected Compositions ]
 						</span>
-						<h2 className="mt-2 text-3xl md:text-5xl font-serif font-normal text-perfume-text">
+						<h2 className="mt-2 dp-section-title font-normal text-perfume-text">
 							Real-World Formulations
 						</h2>
 					</div>
@@ -263,7 +263,7 @@ export default function ProjectsSection() {
 					<div className="flex items-center gap-2 p-1.5 rounded-full bg-perfume-surface border border-perfume-soft/80 shadow-sm">
 						<button
 							onClick={() => setActiveTab("professional")}
-							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans cursor-pointer ${
+							className={`px-5 py-2 dp-small uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer ${
 								activeTab === "professional"
 									? "bg-perfume-primary text-white shadow-md"
 									: "text-perfume-text/70 hover:text-perfume-text"
@@ -274,7 +274,7 @@ export default function ProjectsSection() {
 						</button>
 						<button
 							onClick={() => setActiveTab("personal")}
-							className={`px-5 py-2 text-xs uppercase tracking-widest rounded-full transition-all duration-300 font-sans cursor-pointer ${
+							className={`px-5 py-2 dp-small uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer ${
 								activeTab === "personal"
 									? "bg-perfume-primary text-white shadow-md"
 									: "text-perfume-text/70 hover:text-perfume-text"
@@ -332,7 +332,7 @@ export default function ProjectsSection() {
 											{project.tags.map((tag) => (
 												<span
 													key={tag}
-													className="text-xs font-mono px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10"
+													className="dp-label px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10"
 												>
 													{tag}
 												</span>
@@ -357,15 +357,15 @@ export default function ProjectsSection() {
 									<div className="flex flex-col flex-1 justify-between">
 										<div>
 											<div className="flex justify-between items-center mb-1.5">
-												<span className="text-xs uppercase tracking-[0.25em] font-medium text-perfume-primary font-sans">
+												<span className="dp-label uppercase tracking-[0.25em] font-medium text-perfume-primary">
 													{project.category}
 												</span>
-												<span className="text-xs font-mono text-perfume-text/40">
+												<span className="dp-label text-perfume-text/40">
 													/{project.id}
 												</span>
 											</div>
 
-											<h3 className="text-xl md:text-2xl font-serif font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
+											<h3 className="dp-card-title font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
 												{project.link ? (
 													<a
 														href={project.link}
@@ -380,13 +380,13 @@ export default function ProjectsSection() {
 												)}
 											</h3>
 
-											<p className="text-xs md:text-sm font-light text-perfume-text/75 leading-relaxed font-sans line-clamp-2 mb-4">
+											{/* <p className="dp-body font-light text-perfume-text/75 leading-relaxed font-sans line-clamp-2 mb-4">
 												{project.description}
-											</p>
+											</p> */}
 										</div>
 
 										{/* Action Links (Live / Code) */}
-										<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 text-xs font-mono">
+										<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 dp-label">
 											{project.link && (
 												<a
 													href={project.link}
