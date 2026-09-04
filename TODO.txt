@@ -1,0 +1,4 @@
+Design Improve
+Font Size
+Social Links    [layout.tsx, Contact.tsx]
+"https://YOUR-DOMAIN.com"   [layout.tsx*2, sitemap.ts, robots.tsو FormSpree.com]

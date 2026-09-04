@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function Footer() {
-	const [year, setYear] = useState<number | null>(null);
+	// const [year, setYear] = useState<number | null>(null);
 
-	useEffect(() => {
-		setYear(new Date().getFullYear());
-	}, []);
+	// useEffect(() => {
+	// 	setYear(new Date().getFullYear());
+	// }, []);
+	const year = new Date().getFullYear();
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

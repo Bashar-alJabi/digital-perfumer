@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface NavLink {
 	name: string;
@@ -20,10 +21,32 @@ const navLinks: NavLink[] = [
 export default function Navbar() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isVisible, setIsVisible] = useState(true);
-	const [lastScrollY, setLastScrollY] = useState(0);
+	// const [lastScrollY, setLastScrollY] = useState(0);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [activeHover, setActiveHover] = useState<string | null>(null);
 
+	const lastScrollYRef = useRef(0);
+
+	// useEffect(() => {
+	// 	const handleScroll = () => {
+	// 		const currentScrollY = window.scrollY;
+
+	// 		// Handle transparency state
+	// 		setIsScrolled(currentScrollY > 20);
+
+	// 		// Reveal navbar on scroll up, hide on scroll down
+	// 		if (currentScrollY > lastScrollY && currentScrollY > 100) {
+	// 			setIsVisible(false);
+	// 		} else {
+	// 			setIsVisible(true);
+	// 		}
+
+	// 		setLastScrollY(currentScrollY);
+	// 	};
+
+	// 	window.addEventListener("scroll", handleScroll, { passive: true });
+	// 	return () => window.removeEventListener("scroll", handleScroll);
+	// }, [lastScrollY]);
 	useEffect(() => {
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
@@ -32,18 +55,18 @@ export default function Navbar() {
 			setIsScrolled(currentScrollY > 20);
 
 			// Reveal navbar on scroll up, hide on scroll down
-			if (currentScrollY > lastScrollY && currentScrollY > 100) {
+			if (currentScrollY > lastScrollYRef.current && currentScrollY > 100) {
 				setIsVisible(false);
 			} else {
 				setIsVisible(true);
 			}
 
-			setLastScrollY(currentScrollY);
+			lastScrollYRef.current = currentScrollY;
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, [lastScrollY]);
+	}, []);
 
 	return (
 		<motion.header

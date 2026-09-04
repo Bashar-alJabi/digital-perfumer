@@ -18,6 +18,7 @@ export default function CustomCursor() {
 	const [isHovered, setIsHovered] = useState(false);
 	const [cursorText, setCursorText] = useState("");
 	const [isVisible, setIsVisible] = useState(false);
+	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const particlesRef = useRef<Particle[]>([]);
@@ -48,6 +49,21 @@ export default function CustomCursor() {
 	};
 
 	useEffect(() => {
+		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		const handleChange = () => {
+			setPrefersReducedMotion(mediaQuery.matches);
+		};
+
+		handleChange();
+		mediaQuery.addEventListener("change", handleChange);
+
+		return () => {
+			mediaQuery.removeEventListener("change", handleChange);
+		};
+	}, []);
+
+	useEffect(() => {
 		if (window.matchMedia("(pointer: coarse)").matches) return;
 
 		const canvas = canvasRef.current;
@@ -62,20 +78,67 @@ export default function CustomCursor() {
 		handleResize();
 		window.addEventListener("resize", handleResize);
 
-		let animationFrameId: number;
+		// let animationFrameId: number;
+
+		// const render = () => {
+		// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		// 	// Render cloud-like perfume mist smoke particles
+		// 	for (let i = particlesRef.current.length - 1; i >= 0; i--) {
+		// 		const p = particlesRef.current[i];
+		// 		p.life++;
+		// 		p.x += p.vx;
+		// 		p.y += p.vy;
+		// 		p.vx *= 0.95; // Smooth air resistance
+		// 		p.vy *= 0.95;
+		// 		p.size += 0.35; // Expands gradually like real mist smoke
+
+		// 		const currentAlpha = p.alpha * (1 - p.life / p.maxLife);
+
+		// 		if (p.life >= p.maxLife || currentAlpha <= 0) {
+		// 			particlesRef.current.splice(i, 1);
+		// 			continue;
+		// 		}
+
+		// 		// Feathered radial gradient per particle for soft smoke texture
+		// 		const particleGrad = ctx.createRadialGradient(
+		// 			p.x,
+		// 			p.y,
+		// 			0,
+		// 			p.x,
+		// 			p.y,
+		// 			p.size,
+		// 		);
+		// 		particleGrad.addColorStop(0, `rgba(236, 160, 185, ${currentAlpha})`);
+		// 		particleGrad.addColorStop(1, "rgba(236, 160, 185, 0)");
+
+		// 		ctx.beginPath();
+		// 		ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+		// 		ctx.fillStyle = particleGrad;
+		// 		ctx.fill();
+		// 	}
+
+		// 	animationFrameId = requestAnimationFrame(render);
+		// };
+
+		// render();
+
+		let animationFrameId: number | null = null;
 
 		const render = () => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-			// Render cloud-like perfume mist smoke particles
+			let hasActiveParticles = false;
+
 			for (let i = particlesRef.current.length - 1; i >= 0; i--) {
 				const p = particlesRef.current[i];
+
 				p.life++;
 				p.x += p.vx;
 				p.y += p.vy;
-				p.vx *= 0.95; // Smooth air resistance
+				p.vx *= 0.95;
 				p.vy *= 0.95;
-				p.size += 0.35; // Expands gradually like real mist smoke
+				p.size += 0.35;
 
 				const currentAlpha = p.alpha * (1 - p.life / p.maxLife);
 
@@ -84,7 +147,8 @@ export default function CustomCursor() {
 					continue;
 				}
 
-				// Feathered radial gradient per particle for soft smoke texture
+				hasActiveParticles = true;
+
 				const particleGrad = ctx.createRadialGradient(
 					p.x,
 					p.y,
@@ -93,6 +157,7 @@ export default function CustomCursor() {
 					p.y,
 					p.size,
 				);
+
 				particleGrad.addColorStop(0, `rgba(236, 160, 185, ${currentAlpha})`);
 				particleGrad.addColorStop(1, "rgba(236, 160, 185, 0)");
 
@@ -102,10 +167,16 @@ export default function CustomCursor() {
 				ctx.fill();
 			}
 
-			animationFrameId = requestAnimationFrame(render);
+			animationFrameId = hasActiveParticles
+				? requestAnimationFrame(render)
+				: null;
 		};
 
-		render();
+		const startRendering = () => {
+			if (animationFrameId === null) {
+				animationFrameId = requestAnimationFrame(render);
+			}
+		};
 
 		const handleMouseMove = (e: MouseEvent) => {
 			const currentX = e.clientX;
@@ -127,6 +198,7 @@ export default function CustomCursor() {
 					createMistParticle(currentX, currentY);
 				}
 				lastMousePos.current = { x: currentX, y: currentY };
+				startRendering();
 			}
 		};
 
@@ -146,6 +218,7 @@ export default function CustomCursor() {
 				for (let i = 0; i < 5; i++) {
 					createMistParticle(e.clientX, e.clientY);
 				}
+				startRendering();
 			} else {
 				setIsHovered(false);
 				setCursorText("");
@@ -163,9 +236,16 @@ export default function CustomCursor() {
 			document.removeEventListener("mouseleave", handleMouseLeave);
 			document.removeEventListener("mouseenter", handleMouseEnter);
 			window.removeEventListener("mouseover", handleMouseOver);
-			cancelAnimationFrame(animationFrameId);
+			// cancelAnimationFrame(animationFrameId);
+			if (animationFrameId !== null) {
+				cancelAnimationFrame(animationFrameId);
+			}
 		};
 	}, [mouseX, mouseY]);
+
+	if (prefersReducedMotion) {
+		return null;
+	}
 
 	return (
 		<div

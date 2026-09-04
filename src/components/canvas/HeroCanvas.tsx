@@ -1,7 +1,8 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useEffect, useMemo, useRef } from "react";
+// import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 const vertexShader = `
@@ -22,11 +23,11 @@ const vertexShader = `
     pos.y += waveY;
 
     // Cursor repulsion
-    vec2 dir = pos.xy - uMouse;
-    float dist = length(dir);
-    if (dist < 2.5) {
-      pos.xy += normalize(dir) * (2.5 - dist) * 0.15;
-    }
+	vec2 dir = pos.xy - uMouse;
+	float dist = length(dir);
+	if (dist > 0.0001 && dist < 2.5) {
+		pos.xy += normalize(dir) * (2.5 - dist) * 0.15;
+	}
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_PointSize = aScale * (120.0 / -mvPosition.z);
@@ -60,11 +61,28 @@ const fragmentShader = `
 `;
 
 function ParticleNotes() {
+	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
 	const meshRef = useRef<THREE.Points>(null!);
 	const mouseRef = useRef<[number, number]>([0, 0]);
 	const targetMouseRef = useRef<[number, number]>([0, 0]);
 
 	const count = 450;
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		const handleChange = () => {
+			setPrefersReducedMotion(mediaQuery.matches);
+		};
+
+		handleChange();
+		mediaQuery.addEventListener("change", handleChange);
+
+		return () => {
+			mediaQuery.removeEventListener("change", handleChange);
+		};
+	}, []);
 
 	// Global window mouse listener for smooth interactions
 	useEffect(() => {
@@ -78,17 +96,38 @@ function ParticleNotes() {
 		return () => window.removeEventListener("mousemove", handleMouseMove);
 	}, []);
 
+	// const { positions, scales, noteIndices } = useMemo(() => {
+	// 	const pos = new Float32Array(count * 3);
+	// 	const sc = new Float32Array(count);
+	// 	const indices = new Float32Array(count);
+
+	// 	for (let i = 0; i < count; i++) {
+	// 		pos[i * 3] = (Math.random() - 0.5) * 12;
+	// 		pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+	// 		pos[i * 3 + 2] = (Math.random() - 0.5) * 4;
+
+	// 		sc[i] = Math.random() * 0.8 + 0.3;
+	// 		indices[i] = i % 3;
+	// 	}
+
+	// 	return { positions: pos, scales: sc, noteIndices: indices };
+	// }, [count]);
 	const { positions, scales, noteIndices } = useMemo(() => {
+		const pseudoRandom = (seed: number) => {
+			const x = Math.sin(seed) * 10000;
+			return x - Math.floor(x);
+		};
+
 		const pos = new Float32Array(count * 3);
 		const sc = new Float32Array(count);
 		const indices = new Float32Array(count);
 
 		for (let i = 0; i < count; i++) {
-			pos[i * 3] = (Math.random() - 0.5) * 12;
-			pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
-			pos[i * 3 + 2] = (Math.random() - 0.5) * 4;
+			pos[i * 3] = (pseudoRandom(i * 4) - 0.5) * 12;
+			pos[i * 3 + 1] = (pseudoRandom(i * 4 + 1) - 0.5) * 8;
+			pos[i * 3 + 2] = (pseudoRandom(i * 4 + 2) - 0.5) * 4;
 
-			sc[i] = Math.random() * 0.8 + 0.3;
+			sc[i] = pseudoRandom(i * 4 + 3) * 0.8 + 0.3;
 			indices[i] = i % 3;
 		}
 
@@ -103,25 +142,46 @@ function ParticleNotes() {
 		[],
 	);
 
+	// useFrame((state) => {
+	// 	const { clock } = state;
+	// 	if (meshRef.current) {
+	// 		const material = meshRef.current.material as THREE.ShaderMaterial;
+	// 		material.uniforms.uTime.value = clock.getElapsedTime();
+
+	// 		// Smooth linear interpolation (lerp) for mouse reaction
+	// 		mouseRef.current[0] +=
+	// 			(targetMouseRef.current[0] - mouseRef.current[0]) * 0.05;
+	// 		mouseRef.current[1] +=
+	// 			(targetMouseRef.current[1] - mouseRef.current[1]) * 0.05;
+
+	// 		material.uniforms.uMouse.value.set(
+	// 			mouseRef.current[0],
+	// 			mouseRef.current[1],
+	// 		);
+
+	// 		meshRef.current.rotation.y = clock.getElapsedTime() * 0.015;
+	// 	}
+	// });
 	useFrame((state) => {
+		if (!meshRef.current || prefersReducedMotion) return;
+
 		const { clock } = state;
-		if (meshRef.current) {
-			const material = meshRef.current.material as THREE.ShaderMaterial;
-			material.uniforms.uTime.value = clock.getElapsedTime();
+		const material = meshRef.current.material as THREE.ShaderMaterial;
+		const elapsedTime = clock.getElapsedTime();
 
-			// Smooth linear interpolation (lerp) for mouse reaction
-			mouseRef.current[0] +=
-				(targetMouseRef.current[0] - mouseRef.current[0]) * 0.05;
-			mouseRef.current[1] +=
-				(targetMouseRef.current[1] - mouseRef.current[1]) * 0.05;
+		material.uniforms.uTime.value = elapsedTime;
 
-			material.uniforms.uMouse.value.set(
-				mouseRef.current[0],
-				mouseRef.current[1],
-			);
+		mouseRef.current[0] +=
+			(targetMouseRef.current[0] - mouseRef.current[0]) * 0.05;
+		mouseRef.current[1] +=
+			(targetMouseRef.current[1] - mouseRef.current[1]) * 0.05;
 
-			meshRef.current.rotation.y = clock.getElapsedTime() * 0.015;
-		}
+		material.uniforms.uMouse.value.set(
+			mouseRef.current[0],
+			mouseRef.current[1],
+		);
+
+		// meshRef.current.rotation.y = elapsedTime * 0.015;
 	});
 
 	return (
