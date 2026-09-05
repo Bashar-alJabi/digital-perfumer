@@ -349,7 +349,7 @@ export default function LoadingScreen() {
 	return (
 		<div
 			ref={containerRef}
-			className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#090708]"
+			className="fixed inset-0 z-100 flex items-center justify-center overflow-hidden bg-[#090708]"
 			role="status"
 			aria-label="Entering Digital Perfumer"
 		>
