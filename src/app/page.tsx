@@ -1,5 +1,6 @@
 import CustomCursor from "@/components/cursor/CustomCursor";
 import Footer from "@/components/layout/Footer";
+import LoadingScreen from "@/components/layout/LoadingScreen";
 import Navbar from "@/components/layout/Navbar";
 import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -11,11 +12,12 @@ import TechStackSection from "@/components/sections/TechStackSection";
 export default function Home() {
 	return (
 		<main className="min-h-screen bg-perfume-bg text-perfume-text selection:bg-perfume-primary selection:text-white">
+			<LoadingScreen />
 			<CustomCursor />
 			{/* Floating Capsule Navbar */}
 			<Navbar />
 			{/* Hero Section */}
-			<section id="hero">
+			<section id="home">
 				<HeroSection />
 			</section>
 			{/* Philosophy Section */}

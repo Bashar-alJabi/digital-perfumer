@@ -111,7 +111,7 @@ export default function HeroSection() {
 				</p>
 
 				{/* Call To Actions */}
-				<div ref={ctaRef} className="flex items-center gap-4">
+				{/* <div ref={ctaRef} className="flex items-center gap-4">
 					<a
 						href="#projects"
 						className="px-7 py-3 rounded-full bg-perfume-text text-perfume-bg dp-small font-medium tracking-wider uppercase hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
@@ -123,6 +123,22 @@ export default function HeroSection() {
 						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text dp-small font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
 					>
 						Read Philosophy
+					</a>
+				</div> */}
+				{/* Call To Actions */}
+				<div ref={ctaRef} className="flex items-center gap-4">
+					<a
+						href="#about"
+						className="px-7 py-3 rounded-full bg-perfume-text text-perfume-bg dp-small font-medium tracking-wider uppercase hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+					>
+						Meet the Perfumer
+					</a>
+
+					<a
+						href="#projects"
+						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text dp-small font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
+					>
+						Explore Accords
 					</a>
 				</div>
 			</div>

@@ -70,6 +70,17 @@ export default function AboutSection() {
 					</motion.div>
 				</div>
 
+				<div className="mb-20">
+					<a
+						href="/cv/Bashar-Aljabi_CV.pdf"
+						download
+						className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-perfume-text text-perfume-bg dp-small tracking-wide font-medium hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-sm"
+					>
+						<span>Download CV</span>
+						<span className="text-base">↓</span>
+					</a>
+				</div>
+
 				{/* Key Statistics Strip */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}

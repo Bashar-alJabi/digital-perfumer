@@ -88,7 +88,7 @@ export default function Navbar() {
 					}`}
 				>
 					{/* Logo / Brand Essence */}
-					<a href="#" className="flex items-center gap-3 group">
+					{/* <a href="#" className="flex items-center gap-3 group">
 						<div className="w-8 h-8 rounded-full bg-perfume-primary/10 border border-perfume-primary/30 flex items-center justify-center text-perfume-primary font-bold dp-label group-hover:scale-105 transition-transform duration-300">
 							B
 						</div>
@@ -100,7 +100,30 @@ export default function Navbar() {
 								Eau De Code
 							</span>
 						</div>
-					</a>
+					</a> */}
+					{/* Logo / Brand Essence */}
+					<div className="flex items-center gap-3">
+						{/* Logo → Home */}
+						<a href="#home" aria-label="Back to top" className="group">
+							<div className="w-8 h-8 rounded-full bg-perfume-primary/10 border border-perfume-primary/30 flex items-center justify-center gap-0.5 group-hover:scale-105 transition-transform duration-300">
+								<span className="w-1.5 h-1.5 rounded-full bg-perfume-primary" />
+								<span className="w-1.5 h-1.5 rounded-full bg-perfume-soft border border-perfume-primary/40" />
+								<span className="w-1.5 h-1.5 rounded-full bg-perfume-text" />
+							</div>
+						</a>
+
+						{/* Brand Name → About */}
+						<a href="#about" className="group">
+							<div className="flex flex-col">
+								<span className="font-serif text-base tracking-tight font-medium text-perfume-text group-hover:text-perfume-primary transition-colors duration-300">
+									Bashar
+								</span>
+								<span className="dp-label tracking-widest text-perfume-text/50 uppercase -mt-1">
+									Eau De Code
+								</span>
+							</div>
+						</a>
+					</div>
 
 					{/* Desktop Navigation Links */}
 					<div className="hidden md:flex items-center gap-1 bg-perfume-bg/40 p-1.5 rounded-full border border-perfume-soft/50">
