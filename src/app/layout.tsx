@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 	creator: "Bashar Al-Jabi",
 	publisher: "Bashar Al-Jabi",
 
-	metadataBase: new URL("https://YOUR-DOMAIN.com"),
+	metadataBase: new URL("https://digitalperfumer.vercel.app/"),
 
 	openGraph: {
 		title: "Digital Perfumer — Bashar Al-Jabi",
@@ -77,14 +77,13 @@ export default function RootLayout({
 							"@context": "https://schema.org",
 							"@type": "Person",
 							name: "Bashar Al-Jabi",
-							url: "https://YOUR-DOMAIN.com",
+							url: "https://digitalperfumer.vercel.app/",
 							jobTitle: "Frontend Developer & Creative Developer",
 							description:
 								"Creative developer crafting immersive digital experiences, bespoke interfaces, and high-end web experiences.",
 							sameAs: [
 								"https://github.com/Bashar-alJabi",
-								// Add LinkedIn here later
-								// Add Instagram here later
+								"https://www.linkedin.com/in/bashar-aljabi-engineer",
 							],
 						}),
 					}}

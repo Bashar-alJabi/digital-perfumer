@@ -70,7 +70,37 @@ export default function AboutSection() {
 					</motion.div>
 				</div>
 
+				{/* <div className="mb-20">
+					<a
+						href="/cv/Bashar-Aljabi_CV.pdf"
+						download
+						className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-perfume-text text-perfume-bg dp-small tracking-wide font-medium hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-sm"
+					>
+						<span>Download CV</span>
+						<span className="text-base">↓</span>
+					</a>
+				</div> */}
 				<div className="mb-20">
+					<div className="flex items-center gap-6 mb-6">
+						<a
+							href="https://github.com/Bashar-alJabi"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="dp-small text-perfume-text hover:text-perfume-primary transition-colors duration-300 underline underline-offset-4 decoration-perfume-soft"
+						>
+							GitHub ↗
+						</a>
+
+						<a
+							href="https://www.linkedin.com/in/bashar-aljabi-engineer"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="dp-small text-perfume-text hover:text-perfume-primary transition-colors duration-300 underline underline-offset-4 decoration-perfume-soft"
+						>
+							LinkedIn ↗
+						</a>
+					</div>
+
 					<a
 						href="/cv/Bashar-Aljabi_CV.pdf"
 						download
