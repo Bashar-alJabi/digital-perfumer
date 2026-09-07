@@ -29,7 +29,7 @@ export default function Home() {
 				<AboutSection />
 			</section>
 			{/* Real-World Formulations / Projects Section */}
-			<section id="projects">
+			<section id="work">
 				<ProjectsSection />
 			</section>
 			{/* Formulation Cabinet / Tech Stack Section */}

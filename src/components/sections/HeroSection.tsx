@@ -107,7 +107,9 @@ export default function HeroSection() {
 					// className="text-xs md:text-sm lg:text-base font-medium text-perfume-text/80 tracking-[0.3em] max-w-xl uppercase mb-10"
 					className="dp-small font-medium text-perfume-text/80 tracking-[0.3em] max-w-xl uppercase mb-10"
 				>
-					Composing the Notes of Great Brands
+					{/* Composing the Notes of Great Brands */}
+					{/* Composing Digital Experiences, One Note at a Time */}
+					Composing Digital Notes for Exceptional Brands
 				</p>
 
 				{/* Call To Actions */}
@@ -138,7 +140,7 @@ export default function HeroSection() {
 						href="#projects"
 						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text dp-small font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
 					>
-						Explore Accords
+						Explore My Work
 					</a>
 				</div>
 			</div>

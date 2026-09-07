@@ -13,7 +13,7 @@ interface NavLink {
 const navLinks: NavLink[] = [
 	{ name: "Philosophy", href: "#philosophy", noteLabel: "01" },
 	{ name: "About", href: "#about", noteLabel: "02" },
-	{ name: "Projects", href: "#projects", noteLabel: "03" },
+	{ name: "Work", href: "#work", noteLabel: "03" },
 	{ name: "Skills", href: "#skills", noteLabel: "04" },
 	{ name: "Contact", href: "#contact", noteLabel: "05" },
 ];
@@ -173,7 +173,7 @@ export default function Navbar() {
 							href="#contact"
 							className="px-5 py-2 rounded-full bg-perfume-text text-perfume-bg dp-small font-medium tracking-wide hover:bg-perfume-primary hover:text-white transition-all duration-300 shadow-sm"
 						>
-							Inquire Accord →
+							Start a Project →
 						</a>
 					</div>
 
@@ -224,7 +224,7 @@ export default function Navbar() {
 								onClick={() => setIsMobileMenuOpen(false)}
 								className="w-full text-center py-3 rounded-xl bg-perfume-text text-perfume-bg font-medium dp-small tracking-wider"
 							>
-								Inquire Accord →
+								Start a Project →
 							</a>
 						</div>
 					</motion.div>

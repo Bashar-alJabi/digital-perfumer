@@ -21,7 +21,7 @@ const notes = [
 		number: "03",
 		title: "BASE NOTES",
 		subtitle: "Lasting Impact — How your brand grows",
-		text: "Engineered growth through digital strategy, Meta & Google ad campaigns, SEO, conversion rate optimization, and long-term ecosystem stability.",
+		text: "Building lasting growth through digital strategy, advertising campaigns, SEO, conversion optimization, and continuous improvement.",
 	},
 ];
 

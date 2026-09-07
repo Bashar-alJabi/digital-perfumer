@@ -21,14 +21,14 @@ export default function Footer() {
 				{/* Copyright */}
 				<div className="text-center sm:text-left">
 					{/* © {year ?? "2026"} — All rights reserved. Crafted with passion. */}
-					© {year} — All rights reserved. Crafted with passion.
+					© {year} — All rights reserved.
 				</div>
 
 				{/* Center Signature */}
 				<div className="flex items-center gap-2 tracking-wide">
-					<span>Signature Accord</span>
+					<span>Digital Perfumer</span>
 					<span className="w-1.5 h-1.5 rounded-full bg-perfume-primary animate-pulse" />
-					<span>Digital Perfumery Edition</span>
+					<span>By Bashar Al-Jabi</span>
 				</div>
 
 				{/* Back to Top Button */}

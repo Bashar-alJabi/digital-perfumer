@@ -16,78 +16,78 @@ const skillGroups: SkillGroup[] = [
 	{
 		id: "web-design",
 		code: "PLT-01",
-		categoryTitle: "Web Platforms & Design Tools",
-		subtitle: "Visual Sculpting & No-Code Systems",
+		categoryTitle: "Web Design & Platforms",
+		subtitle: "Design, CMS & No-Code",
 		description:
-			"Aesthetic composition tools and powerful CMS engines for rapid, high-impact digital presence.",
+			"Design tools and website platforms used to create polished, responsive, and effective digital experiences.",
 		skills: [
-			{ name: "WordPress (Elementor)", highlight: true },
-			{ name: "Wix Platform", highlight: true },
+			{ name: "WordPress / Elementor", highlight: true },
+			{ name: "Canva", highlight: true },
+			{ name: "Wix" },
 			{ name: "Figma" },
-			{ name: "Canva Pro" },
 		],
 	},
 	{
 		id: "frontend",
 		code: "FE-02",
 		categoryTitle: "Frontend Development",
-		subtitle: "Interactive Code & Architecture",
+		subtitle: "Modern Interfaces & Frontend Engineering",
 		description:
-			"Modern component libraries, responsive styling, and custom scripting for tailored Web UI.",
+			"Modern frontend technologies used to build responsive, interactive, and high-performance web experiences.",
 		skills: [
 			{ name: "Next.js", highlight: true },
-			{ name: "React (State Mgmt)", highlight: true },
+			{ name: "React", highlight: true },
 			{ name: "Tailwind CSS", highlight: true },
 			{ name: "TypeScript", highlight: true },
-			{ name: "JavaScript (ES6+)" },
 			{ name: "HTML5 & CSS3" },
+			{ name: "JavaScript (ES6+)" },
 			{ name: "Sass / SCSS" },
 			{ name: "Bootstrap" },
 			{ name: "Pug.js" },
-			{ name: "Gulp.js Task Runner" },
+			{ name: "Gulp.js" },
 		],
 	},
 	{
 		id: "practices",
 		code: "DEV-03",
 		categoryTitle: "Development Practices & Tools",
-		subtitle: "System Control & Workflow Pipelines",
+		subtitle: "Workflow, Integration & Development Tools",
 		description:
-			"Version control systems, API connections, testing setups, and AI-assisted production workflows.",
+			"Tools and practices used for version control, API integration, testing, deployment, and AI-assisted workflows.",
 		skills: [
-			{ name: "Leveraging AI Tools", highlight: true },
-			{ name: "Git & GitHub (VCS)", highlight: true },
+			{ name: "AI-Assisted Development", highlight: true },
+			{ name: "Git & GitHub", highlight: true },
 			{ name: "API Integration", highlight: true },
-			{ name: "Testing Tools" },
-			{ name: "CI/CD Pipeline" },
-			{ name: "Agile Environment" },
+			{ name: "Testing" },
+			{ name: "CI/CD" },
+			{ name: "Agile" },
 		],
 	},
 	{
 		id: "capabilities",
 		code: "CAP-04",
-		categoryTitle: "Project Capabilities",
-		subtitle: "Execution & Engineering Standards",
+		categoryTitle: "Digital Capabilities",
+		subtitle: "Design, Performance & Problem Solving",
 		description:
-			"Core problem-solving methodologies, technical debugging, and mobile-first engineering.",
+			"Practical capabilities focused on creating responsive, accessible, optimized, and reliable digital experiences.",
 		skills: [
 			{ name: "UI/UX Design", highlight: true },
 			{ name: "Responsive Design", highlight: true },
 			{ name: "Website Optimization & Maintenance", highlight: true },
-			{ name: "Troubleshooting & Debugging", highlight: true },
-			{ name: "Mobile-First Dev" },
+			{ name: "Troubleshooting & Debugging" },
+			{ name: "Mobile-First Development" },
 			{ name: "Problem Solving" },
 		],
 	},
 	{
 		id: "marketing",
 		code: "MKT-05",
-		categoryTitle: "Digital Marketing & Office Suite",
-		subtitle: "Growth Engines & Data Analytics",
+		categoryTitle: "Digital Marketing",
+		subtitle: "Growth, Advertising & Analytics",
 		description:
-			"Performance advertising campaigns, lead generation systems, and analytical tracking tools.",
+			"Digital marketing skills focused on advertising, lead generation, audience targeting, creative campaigns, and performance analysis.",
 		skills: [
-			{ name: "Meta Ads Manager", highlight: true },
+			{ name: "Meta Ads", highlight: true },
 			{ name: "TikTok Ads", highlight: true },
 			{ name: "Google Ads", highlight: true },
 			{ name: "Campaign Setup & Optimization" },
@@ -95,8 +95,6 @@ const skillGroups: SkillGroup[] = [
 			{ name: "Lead Generation" },
 			{ name: "Ad Creative Design" },
 			{ name: "Performance Analysis" },
-			{ name: "Microsoft Excel" },
-			{ name: "Word & PowerPoint" },
 		],
 	},
 ];
@@ -133,19 +131,19 @@ export default function TechStackSection() {
 				<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20">
 					<div>
 						<p className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
-							[ Raw Ingredients & Tools ]
+							[ THE INGREDIENTS ]
 						</p>
 						{/* <h2 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-serif font-normal text-perfume-text leading-tight"> */}
 						<h2 className="mt-4 dp-section-title font-normal text-perfume-text leading-tight">
-							The Digital <br />
-							<span className="italic text-perfume-primary">
-								Formulation Cabinet
-							</span>
+							Digital {/* <br /> */}
+							<span className="italic text-perfume-primary">Skills</span>
 						</h2>
 					</div>
 					<p className="dp-body font-light text-perfume-text/75 max-w-md leading-relaxed">
-						Every creation requires precise raw materials. Here is the technical
-						inventory used to craft memorable digital products.
+						{/* Every creation requires precise raw materials. Here is the technical
+						inventory used to craft memorable digital products. */}
+						The tools, technologies, and expertise I use to design, build, and
+						grow digital experiences.
 					</p>
 				</div>
 
@@ -181,7 +179,7 @@ export default function TechStackSection() {
 												{group.categoryTitle}
 											</h3>
 											<p className="dp-label font-light text-perfume-text/60 mt-0.5">
-												{group.skills.length} Ingredients
+												{group.skills.length} Skills
 											</p>
 										</div>
 									</div>
@@ -216,7 +214,7 @@ export default function TechStackSection() {
 									<div className="flex items-center justify-between border-b border-perfume-soft/50 pb-6 mb-8">
 										<div>
 											<span className="dp-label uppercase tracking-widest text-perfume-primary">
-												[{activeGroup.code}] Cabinet Record
+												[{activeGroup.code}] {activeGroup.subtitle}
 											</span>
 											<h3 className="dp-card-title text-perfume-text mt-1">
 												{activeGroup.categoryTitle}
@@ -258,12 +256,12 @@ export default function TechStackSection() {
 								</div>
 
 								{/* Cabinet Record Footer */}
-								<div className="mt-12 pt-6 border-t border-perfume-soft/40 flex items-center justify-between dp-label text-perfume-text/50">
-									<span>Selected Essence Category</span>
+								{/* <div className="mt-12 pt-6 border-t border-perfume-soft/40 flex items-center justify-between dp-label text-perfume-text/50">
+									<span>Focus</span>
 									<span className="text-perfume-primary/80">
 										{activeGroup.subtitle}
 									</span>
-								</div>
+								</div> */}
 							</motion.div>
 						</AnimatePresence>
 					</div>

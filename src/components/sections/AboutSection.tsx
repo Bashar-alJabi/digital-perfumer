@@ -6,9 +6,9 @@ import React from "react";
 // Key statistics highlighting real-world impact
 const stats = [
 	{ label: "Years of Experience", value: "5+" },
-	{ label: "E-Commerce Stores Built", value: "30+" },
-	{ label: "Ad Campaigns Managed", value: "3-Digit ROI" },
-	{ label: "System Automations", value: "100%" },
+	{ label: "Brands & Businesses", value: "30+" },
+	{ label: "Websites Built", value: "20+" },
+	{ label: "Ad Campaigns", value: "15+" },
 ];
 
 export default function AboutSection() {
@@ -25,7 +25,7 @@ export default function AboutSection() {
 				<div className="flex items-center gap-3 mb-8">
 					<span className="w-1.5 h-1.5 rounded-full bg-perfume-primary" />
 					<span className="dp-label uppercase tracking-[0.4em] text-perfume-text/60">
-						About The Creator
+						About The Perfumer
 					</span>
 				</div>
 
@@ -42,9 +42,9 @@ export default function AboutSection() {
 							// className="text-4xl md:text-6xl lg:text-7xl font-serif font-normal leading-[1.08] tracking-tight text-perfume-text"
 							className="dp-section-title font-normal leading-[1.08] tracking-tight text-perfume-text"
 						>
-							Blending technical precision with <br />
+							Blending design, technology, and growth into {/* <br /> */}
 							<span className="italic font-light text-perfume-primary">
-								growth strategy.
+								digital experiences.
 							</span>
 						</h2>
 					</motion.div>
@@ -58,15 +58,22 @@ export default function AboutSection() {
 						className="lg:col-span-5 space-y-6 text-perfume-text/80 font-light dp-body leading-relaxed"
 					>
 						<p>
-							I’m Bashar, a Full-Stack Web Developer and Digital Marketer. I
-							bridge the gap between technical execution and business revenue.
+							{/* I’m Bashar, a Full-Stack Web Developer and Digital Marketer. I
+							bridge the gap between technical execution and business revenue. */}
+							I’m Bashar, a Frontend Developer, Web Designer, and Digital
+							Marketer, creating digital experiences where design, technology,
+							and business work together.
 						</p>
-						<p>
+						{/* <p>
 							A beautiful website is useless if it doesn’t convert, and a great
 							ad campaign fails if the platform lags. I build digital ecosystems
 							where high-end design, flawless code, and targeted marketing work
 							in perfect synergy.
-						</p>
+						</p> */}
+						<blockquote className="border-l border-perfume-primary/50 pl-6 md:pl-8 text-perfume-text/70 italic">
+							A beautiful website should do more than look good. It should
+							perform, connect with people, and drive results.
+						</blockquote>
 					</motion.div>
 				</div>
 

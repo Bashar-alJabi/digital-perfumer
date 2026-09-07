@@ -96,21 +96,20 @@ export default function ContactSection() {
 					>
 						<div>
 							<p className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
-								The Final Trail
+								LET&apos;S CREATE
 							</p>
 							{/* <h2 className="mt-4 text-4xl md:text-6xl font-serif font-normal text-perfume-text leading-tight"> */}
 							<h2 className="mt-4 dp-section-title font-normal text-perfume-text leading-tight">
 								Let&apos;s compose your <br />
 								<span className="italic text-perfume-primary">
-									signature scent.
+									digital presence.
 								</span>
 							</h2>
 						</div>
 
 						<p className="dp-body font-light text-perfume-text/80 leading-relaxed">
-							Every iconic brand experience begins with a meaningful
-							conversation. Reach out to discuss a new creation, strategic
-							campaign, or tailored web platform.
+							Every great digital experience starts with a conversation. Tell me
+							about your brand, your goals, and what you want to create.
 						</p>
 
 						{/* Direct Contact Cards */}
@@ -118,7 +117,7 @@ export default function ContactSection() {
 							{/* Email Link */}
 							<div>
 								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-1">
-									Direct Inquiries
+									Email
 								</span>
 								<a
 									href={`mailto:${contactEmail}`}
@@ -131,18 +130,18 @@ export default function ContactSection() {
 							{/* Status / Availability Badge */}
 							<div>
 								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-2">
-									Current Status
+									Availability
 								</span>
 								<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-perfume-surface border border-perfume-soft dp-label text-perfume-text">
 									<span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-									<span>Available for Q3/Q4 Bespoke Projects</span>
+									<span>Available for New Projects</span>
 								</div>
 							</div>
 
 							{/* Social Channels with Icons */}
 							<div className="pt-2">
 								<span className="dp-label uppercase tracking-widest text-perfume-text/50 block mb-3">
-									Digital Footprint
+									Elsewhere
 								</span>
 								<div className="flex items-center gap-3">
 									{socialLinks.map((social) => (
@@ -176,11 +175,11 @@ export default function ContactSection() {
 								<div className="py-16 text-center space-y-4">
 									<span className="text-4xl block">✨</span>
 									<h3 className="dp-card-title text-perfume-text">
-										Formulation Received
+										Message Received
 									</h3>
 									<p className="dp-body font-light text-perfume-text/75 max-w-md mx-auto">
-										Thank you for reaching out. Your message has been safely
-										logged, and I will get back to you shortly.
+										Thank you for reaching out. Your message has been received,
+										and I’ll get back to you shortly.
 									</p>
 									<button
 										type="button"
@@ -196,7 +195,7 @@ export default function ContactSection() {
 										}}
 										className="mt-6 dp-label uppercase tracking-widest text-perfume-primary underline underline-offset-4 cursor-pointer"
 									>
-										Send Another Note
+										Send Another Message
 									</button>
 								</div>
 							) : (
@@ -204,7 +203,7 @@ export default function ContactSection() {
 									{/* Service Accord Selection */}
 									<div>
 										<label className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-3">
-											Select Desired Accord
+											What can I help you with?
 										</label>
 										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 											{serviceOptions.map((option) => {
@@ -245,14 +244,14 @@ export default function ContactSection() {
 											htmlFor="contact-name"
 											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
-											Your Name
+											Name
 										</label>
 										<input
 											id="contact-name"
 											name="name"
 											type="text"
 											required
-											placeholder="e.g. Julian Vance"
+											placeholder="Your name"
 											value={formData.name}
 											onChange={handleInputChange}
 											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
@@ -265,14 +264,14 @@ export default function ContactSection() {
 											htmlFor="contact-email"
 											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
-											Your Email Address
+											Email Address
 										</label>
 										<input
 											id="contact-email"
 											name="email"
 											type="email"
 											required
-											placeholder="julian@brand.com"
+											placeholder="you@brand.com"
 											value={formData.email}
 											onChange={handleInputChange}
 											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300"
@@ -290,14 +289,14 @@ export default function ContactSection() {
 											htmlFor="contact-message"
 											className="dp-label uppercase tracking-widest text-perfume-text/60 block mb-2"
 										>
-											Project Vision & Details
+											Project Details
 										</label>
 										<textarea
 											id="contact-message"
 											name="message"
 											rows={4}
 											required
-											placeholder="Describe your vision, goals, or timeline..."
+											placeholder="Tell me about your project, goals, or timeline..."
 											value={formData.message}
 											onChange={handleInputChange}
 											className="w-full bg-perfume-bg border border-perfume-soft/80 rounded-xl p-4 dp-small text-perfume-text placeholder:text-perfume-text/30 focus:outline-none focus:border-perfume-primary transition-colors duration-300 resize-none"
@@ -326,10 +325,10 @@ export default function ContactSection() {
 										{/* {isSubmitting ? ( */}
 										{state.submitting ? (
 											<span className="inline-block animate-pulse">
-												Sending Formulation...
+												Sending Message...
 											</span>
 										) : (
-											<span>Initiate Contact Accord →</span>
+											<span>Start a Conversation →</span>
 										)}
 									</button>
 								</form>

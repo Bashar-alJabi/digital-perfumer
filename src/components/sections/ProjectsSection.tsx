@@ -70,7 +70,7 @@ const allProjects: Project[] = [
 			"Dubai property showcase platform crafted with responsive luxury layout structure and seamless property discovery.",
 		tags: ["Wix", "Web Development", "UI Design"],
 		link: "https://richstarsuae.com/",
-		customImage: "/projects/rich-stars.webp",
+		// customImage: "/projects/rich-stars.webp",
 		type: "professional",
 	},
 	{
@@ -92,7 +92,7 @@ const allProjects: Project[] = [
 			"Sleek corporate web application developed with React and Tailwind CSS, featuring fluid animations and interactive presentation.",
 		tags: ["React", "Tailwind CSS", "Shadcn UI", "Motion.dev"],
 		link: "https://arahatrading.com/",
-		customImage: "/projects/araha-trading.webp",
+		// customImage: "/projects/araha-trading.webp",
 		type: "professional",
 	},
 	{
@@ -102,7 +102,7 @@ const allProjects: Project[] = [
 		description: "",
 		tags: ["React", "Tailwind CSS", "Shadcn UI", "Motion.dev"],
 		link: "https://inbs-uae.com/",
-		customImage: "/projects/inbs-realestate.webp",
+		// customImage: "/projects/inbs-realestate.webp",
 		type: "professional",
 	},
 	{
@@ -113,7 +113,7 @@ const allProjects: Project[] = [
 			"Dual corporate platform and luxury real estate portal engineered for high performance, lead routing, and UI responsiveness.",
 		tags: ["React", "Tailwind CSS", "Shadcn UI", "Motion.dev"],
 		link: "https://inbsrealestate.com/",
-		customImage: "/projects/inbs-realestate.webp",
+		// customImage: "/projects/inbs-realestate.webp",
 		type: "professional",
 	},
 
@@ -434,11 +434,11 @@ export default function ProjectsSection() {
 				<div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center justify-between gap-6 z-20">
 					<div>
 						<span className="dp-label uppercase tracking-[0.4em] font-semibold text-perfume-text/60">
-							[ Selected Compositions ]
+							[ THE COMPOSITIONS ]
 						</span>
 
 						<h2 className="mt-2 dp-section-title font-normal text-perfume-text">
-							Real-World Formulations
+							Real-World Work
 						</h2>
 					</div>
 
