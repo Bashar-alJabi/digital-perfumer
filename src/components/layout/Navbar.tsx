@@ -126,7 +126,7 @@ export default function Navbar() {
 					</div>
 
 					{/* Desktop Navigation Links */}
-					<div className="hidden md:flex items-center gap-1 bg-perfume-bg/40 p-1.5 rounded-full border border-perfume-soft/50">
+					<div className="hidden lg:flex items-center gap-1 bg-perfume-bg/40 p-1.5 rounded-full border border-perfume-soft/50">
 						{navLinks.map((link) => {
 							const isHovered = activeHover === link.name;
 
@@ -181,7 +181,7 @@ export default function Navbar() {
 					<button
 						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 						aria-label="Toggle Navigation Menu"
-						className="md:hidden p-2 rounded-full text-perfume-text hover:bg-perfume-soft/40 transition-colors"
+						className="lg:hidden p-2 rounded-full text-perfume-text hover:bg-perfume-soft/40 transition-colors"
 					>
 						<svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
 							{isMobileMenuOpen ? (
@@ -202,7 +202,7 @@ export default function Navbar() {
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -10 }}
 						transition={{ duration: 0.2 }}
-						className="md:hidden mt-3 max-w-7xl mx-auto bg-perfume-surface/95 backdrop-blur-xl border border-perfume-soft rounded-3xl p-5 shadow-xl"
+						className="lg:hidden mt-3 max-w-7xl mx-auto bg-perfume-surface/95 backdrop-blur-xl border border-perfume-soft rounded-3xl p-5 shadow-xl"
 					>
 						<div className="flex flex-col space-y-3">
 							{navLinks.map((link) => (

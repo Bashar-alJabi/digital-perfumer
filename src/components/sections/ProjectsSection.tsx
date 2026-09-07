@@ -191,12 +191,136 @@ const allProjects: Project[] = [
 	},
 ];
 
+function ProjectCard({
+	project,
+	imageSrc,
+	isActive,
+	handleImageError,
+}: {
+	project: Project;
+	imageSrc: string | null;
+	isActive: boolean;
+	handleImageError: (id: string) => void;
+}) {
+	return (
+		<motion.div
+			animate={{
+				opacity: isActive ? 1 : 0.5,
+				scale: isActive ? 1 : 0.94,
+			}}
+			transition={{
+				duration: 0.45,
+				ease: "easeOut",
+			}}
+			className="group relative w-105 md:w-120 shrink-0 rounded-3xl border border-perfume-soft bg-perfume-surface p-5 md:p-6 overflow-hidden shadow-sm hover:border-perfume-primary/50 transition-all duration-300 flex flex-col justify-between"
+		>
+			{/* Image Container */}
+			<div className="relative w-full h-48 md:h-60 rounded-2xl overflow-hidden mb-4 border border-perfume-soft/50 bg-perfume-bg">
+				{imageSrc ? (
+					<Image
+						src={imageSrc}
+						alt={project.title}
+						fill
+						sizes="(max-width: 768px) 420px, 480px"
+						onError={() => handleImageError(project.id)}
+						className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+					/>
+				) : (
+					<div className="w-full h-full bg-linear-to-br from-rose-950/20 via-perfume-soft/40 to-perfume-surface flex items-center justify-center">
+						<span className="text-4xl font-serif text-perfume-primary/40">
+							/{project.id}
+						</span>
+					</div>
+				)}
+
+				<div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
+					{project.tags.map((tag) => (
+						<span
+							key={tag}
+							className="dp-label px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10"
+						>
+							{tag}
+						</span>
+					))}
+				</div>
+
+				{project.link && (
+					<a
+						href={project.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 text-xs hover:bg-perfume-primary"
+						aria-label={`Visit ${project.title}`}
+					>
+						↗
+					</a>
+				)}
+			</div>
+
+			<div className="flex flex-col flex-1 justify-between">
+				<div>
+					<div className="flex justify-between items-center mb-1.5">
+						<span className="dp-label uppercase tracking-[0.25em] font-medium text-perfume-primary">
+							{project.category}
+						</span>
+
+						<span className="dp-label text-perfume-text/40">/{project.id}</span>
+					</div>
+
+					<h3 className="dp-card-title font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
+						{project.link ? (
+							<a
+								href={project.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="hover:underline"
+							>
+								{project.title}
+							</a>
+						) : (
+							project.title
+						)}
+					</h3>
+				</div>
+
+				<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 dp-label">
+					{project.link && (
+						<a
+							href={project.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-perfume-primary hover:underline flex items-center gap-1"
+						>
+							<span>Live Site</span>
+							<span>↗</span>
+						</a>
+					)}
+
+					{project.codeLink && (
+						<a
+							href={project.codeLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-perfume-text/60 hover:text-perfume-text hover:underline flex items-center gap-1 ml-auto"
+						>
+							<span>Source Code</span>
+							<span>↗</span>
+						</a>
+					)}
+				</div>
+			</div>
+		</motion.div>
+	);
+}
+
 export default function ProjectsSection() {
 	const [activeTab, setActiveTab] = useState<"professional" | "personal">(
 		"professional",
 	);
 	const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
 	const [scrollDistance, setScrollDistance] = useState(0);
+
+	const [activeProjectIndex, setActiveProjectIndex] = useState(0);
 
 	const targetRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
@@ -225,6 +349,23 @@ export default function ProjectsSection() {
 	});
 
 	const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
+
+	useEffect(() => {
+		const unsubscribe = scrollYProgress.on("change", (progress) => {
+			if (filteredProjects.length <= 1) {
+				setActiveProjectIndex(0);
+				return;
+			}
+
+			const index = Math.round(progress * (filteredProjects.length - 1));
+
+			setActiveProjectIndex(
+				Math.min(filteredProjects.length - 1, Math.max(0, index)),
+			);
+		});
+
+		return () => unsubscribe();
+	}, [scrollYProgress, filteredProjects.length]);
 
 	const handleImageError = (id: string) => {
 		setImgErrors((prev) => ({ ...prev, [id]: true }));
@@ -426,7 +567,7 @@ export default function ProjectsSection() {
 	return (
 		<section
 			ref={targetRef}
-			className="relative md:h-[280vh] bg-perfume-bg text-perfume-text border-t border-perfume-soft/40 select-none"
+			className="relative md:h-[280vh] bg-perfume-bg text-perfume-text border-t border-perfume-soft/40"
 		>
 			{/* Sticky Viewport Frame — Desktop / Tablet */}
 			<div className="md:sticky md:top-0 flex min-h-screen md:h-screen flex-col justify-between overflow-hidden py-10 md:py-16">
@@ -606,116 +747,124 @@ export default function ProjectsSection() {
 						style={{ x }}
 						className="flex gap-6 md:gap-8 px-6 md:px-12 w-max"
 					>
-						{filteredProjects.map((project) => {
+						{/* {filteredProjects.map((project) => { */}
+						{filteredProjects.map((project, index) => {
 							const imageSrc = getProjectImage(project);
 
 							return (
-								<div
+								// <div
+								// 	key={project.id}
+								// 	className="group relative w-105 md:w-120 shrink-0 rounded-3xl border border-perfume-soft bg-perfume-surface p-5 md:p-6 overflow-hidden shadow-sm hover:border-perfume-primary/50 transition-all duration-300 flex flex-col justify-between"
+								// >
+								// 	{/* Image Container */}
+								// 	<div className="relative w-full h-48 md:h-60 rounded-2xl overflow-hidden mb-4 border border-perfume-soft/50 bg-perfume-bg">
+								// 		{imageSrc ? (
+								// 			<Image
+								// 				src={imageSrc}
+								// 				alt={project.title}
+								// 				fill
+								// 				sizes="(max-width: 768px) 420px, 480px"
+								// 				onError={() => handleImageError(project.id)}
+								// 				className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+								// 			/>
+								// 		) : (
+								// 			<div className="w-full h-full bg-linear-to-br from-rose-950/20 via-perfume-soft/40 to-perfume-surface flex items-center justify-center">
+								// 				<span className="text-4xl font-serif text-perfume-primary/40">
+								// 					/{project.id}
+								// 				</span>
+								// 			</div>
+								// 		)}
+
+								// 		{/* Tech Stack Chips Overlay */}
+								// 		<div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
+								// 			{project.tags.map((tag) => (
+								// 				<span
+								// 					key={tag}
+								// 					className="dp-label px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10"
+								// 				>
+								// 					{tag}
+								// 				</span>
+								// 			))}
+								// 		</div>
+
+								// 		{/* External Link Indicator */}
+								// 		{project.link && (
+								// 			<a
+								// 				href={project.link}
+								// 				target="_blank"
+								// 				rel="noopener noreferrer"
+								// 				className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 text-xs hover:bg-perfume-primary"
+								// 				aria-label={`Visit ${project.title}`}
+								// 			>
+								// 				↗
+								// 			</a>
+								// 		)}
+								// 	</div>
+
+								// 	{/* Card Main Body */}
+								// 	<div className="flex flex-col flex-1 justify-between">
+								// 		<div>
+								// 			<div className="flex justify-between items-center mb-1.5">
+								// 				<span className="dp-label uppercase tracking-[0.25em] font-medium text-perfume-primary">
+								// 					{project.category}
+								// 				</span>
+
+								// 				<span className="dp-label text-perfume-text/40">
+								// 					/{project.id}
+								// 				</span>
+								// 			</div>
+
+								// 			<h3 className="dp-card-title font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
+								// 				{project.link ? (
+								// 					<a
+								// 						href={project.link}
+								// 						target="_blank"
+								// 						rel="noopener noreferrer"
+								// 						className="hover:underline"
+								// 					>
+								// 						{project.title}
+								// 					</a>
+								// 				) : (
+								// 					project.title
+								// 				)}
+								// 			</h3>
+								// 		</div>
+
+								// 		{/* Action Links */}
+								// 		<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 dp-label">
+								// 			{project.link && (
+								// 				<a
+								// 					href={project.link}
+								// 					target="_blank"
+								// 					rel="noopener noreferrer"
+								// 					className="text-perfume-primary hover:underline flex items-center gap-1"
+								// 				>
+								// 					<span>Live Site</span>
+								// 					<span>↗</span>
+								// 				</a>
+								// 			)}
+
+								// 			{project.codeLink && (
+								// 				<a
+								// 					href={project.codeLink}
+								// 					target="_blank"
+								// 					rel="noopener noreferrer"
+								// 					className="text-perfume-text/60 hover:text-perfume-text hover:underline flex items-center gap-1 ml-auto"
+								// 				>
+								// 					<span>Source Code</span>
+								// 					<span>↗</span>
+								// 				</a>
+								// 			)}
+								// 		</div>
+								// 	</div>
+								// </div>
+								<ProjectCard
 									key={project.id}
-									className="group relative w-105 md:w-120 shrink-0 rounded-3xl border border-perfume-soft bg-perfume-surface p-5 md:p-6 overflow-hidden shadow-sm hover:border-perfume-primary/50 transition-all duration-300 flex flex-col justify-between"
-								>
-									{/* Image Container */}
-									<div className="relative w-full h-48 md:h-60 rounded-2xl overflow-hidden mb-4 border border-perfume-soft/50 bg-perfume-bg">
-										{imageSrc ? (
-											<Image
-												src={imageSrc}
-												alt={project.title}
-												fill
-												sizes="(max-width: 768px) 420px, 480px"
-												onError={() => handleImageError(project.id)}
-												className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-											/>
-										) : (
-											<div className="w-full h-full bg-linear-to-br from-rose-950/20 via-perfume-soft/40 to-perfume-surface flex items-center justify-center">
-												<span className="text-4xl font-serif text-perfume-primary/40">
-													/{project.id}
-												</span>
-											</div>
-										)}
-
-										{/* Tech Stack Chips Overlay */}
-										<div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
-											{project.tags.map((tag) => (
-												<span
-													key={tag}
-													className="dp-label px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 border border-white/10"
-												>
-													{tag}
-												</span>
-											))}
-										</div>
-
-										{/* External Link Indicator */}
-										{project.link && (
-											<a
-												href={project.link}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 text-xs hover:bg-perfume-primary"
-												aria-label={`Visit ${project.title}`}
-											>
-												↗
-											</a>
-										)}
-									</div>
-
-									{/* Card Main Body */}
-									<div className="flex flex-col flex-1 justify-between">
-										<div>
-											<div className="flex justify-between items-center mb-1.5">
-												<span className="dp-label uppercase tracking-[0.25em] font-medium text-perfume-primary">
-													{project.category}
-												</span>
-
-												<span className="dp-label text-perfume-text/40">
-													/{project.id}
-												</span>
-											</div>
-
-											<h3 className="dp-card-title font-normal text-perfume-text mb-2 group-hover:text-perfume-primary transition-colors duration-300">
-												{project.link ? (
-													<a
-														href={project.link}
-														target="_blank"
-														rel="noopener noreferrer"
-														className="hover:underline"
-													>
-														{project.title}
-													</a>
-												) : (
-													project.title
-												)}
-											</h3>
-										</div>
-
-										{/* Action Links */}
-										<div className="flex items-center gap-3 pt-2 border-t border-perfume-soft/30 dp-label">
-											{project.link && (
-												<a
-													href={project.link}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="text-perfume-primary hover:underline flex items-center gap-1"
-												>
-													<span>Live Site</span>
-													<span>↗</span>
-												</a>
-											)}
-
-											{project.codeLink && (
-												<a
-													href={project.codeLink}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="text-perfume-text/60 hover:text-perfume-text hover:underline flex items-center gap-1 ml-auto"
-												>
-													<span>Source Code</span>
-													<span>↗</span>
-												</a>
-											)}
-										</div>
-									</div>
-								</div>
+									project={project}
+									imageSrc={imageSrc}
+									isActive={index === activeProjectIndex}
+									handleImageError={handleImageError}
+								/>
 							);
 						})}
 					</motion.div>

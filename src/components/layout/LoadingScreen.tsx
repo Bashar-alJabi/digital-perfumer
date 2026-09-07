@@ -482,9 +482,9 @@ export default function LoadingScreen() {
 				</p>
 			</div>
 
-			<div className="absolute left-8 top-8 dp-label tracking-[0.3em] text-white/20">
+			{/* <div className="absolute left-8 top-8 dp-label tracking-[0.3em] text-white/20">
 				TOP / HEART / BASE
-			</div>
+			</div> */}
 		</div>
 	);
 }

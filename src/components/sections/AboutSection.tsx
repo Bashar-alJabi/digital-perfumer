@@ -4,18 +4,18 @@ import { motion } from "framer-motion";
 import React from "react";
 
 // Key statistics highlighting real-world impact
-const stats = [
-	{ label: "Years of Experience", value: "5+" },
-	{ label: "Brands & Businesses", value: "30+" },
-	{ label: "Websites Built", value: "20+" },
-	{ label: "Ad Campaigns", value: "15+" },
-];
+// const stats = [
+// 	{ label: "Years of Experience", value: "5+" },
+// 	{ label: "Brands & Businesses", value: "30+" },
+// 	{ label: "Websites Built", value: "20+" },
+// 	{ label: "Ad Campaigns", value: "15+" },
+// ];
 
 export default function AboutSection() {
 	return (
 		<section
 			id="about"
-			className="relative py-28 md:py-36 px-6 md:px-12 bg-perfume-bg text-perfume-text select-none overflow-hidden border-t border-perfume-soft/40"
+			className="relative py-28 md:py-36 px-6 md:px-12 bg-perfume-bg text-perfume-text overflow-hidden border-t border-perfume-soft/40"
 		>
 			{/* Background Glow */}
 			<div className="absolute bottom-10 right-10 w-125 h-125 bg-perfume-primary/5 rounded-full blur-[150px] pointer-events-none" />
@@ -87,7 +87,7 @@ export default function AboutSection() {
 						<span className="text-base">↓</span>
 					</a>
 				</div> */}
-				<div className="mb-20">
+				<div className="mb-0">
 					<div className="flex items-center gap-6 mb-6">
 						<a
 							href="https://github.com/Bashar-alJabi"
@@ -119,7 +119,7 @@ export default function AboutSection() {
 				</div>
 
 				{/* Key Statistics Strip */}
-				<motion.div
+				{/* <motion.div
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
@@ -136,7 +136,7 @@ export default function AboutSection() {
 							</p>
 						</div>
 					))}
-				</motion.div>
+				</motion.div> */}
 			</div>
 		</section>
 	);

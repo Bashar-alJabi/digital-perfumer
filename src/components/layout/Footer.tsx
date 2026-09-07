@@ -16,7 +16,7 @@ export default function Footer() {
 	};
 
 	return (
-		<footer className="relative py-8 px-6 md:px-12 bg-perfume-bg text-perfume-text border-t border-perfume-soft/40 select-none">
+		<footer className="relative py-8 px-6 md:px-12 bg-perfume-bg text-perfume-text border-t border-perfume-soft/40">
 			<div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 dp-label text-perfume-text/60">
 				{/* Copyright */}
 				<div className="text-center sm:text-left">

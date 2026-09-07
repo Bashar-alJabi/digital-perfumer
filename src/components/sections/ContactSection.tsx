@@ -169,7 +169,38 @@ export default function ContactSection() {
 						transition={{ duration: 0.8, delay: 0.2 }}
 						className="lg:col-span-7"
 					>
-						<div className="rounded-3xl border border-perfume-soft bg-perfume-surface p-8 md:p-12 shadow-sm">
+						{/* <div className="rounded-3xl border border-perfume-soft bg-perfume-surface p-8 md:p-12 shadow-sm"> */}
+						<div className="relative rounded-3xl bg-perfume-surface p-8 md:p-12 shadow-sm overflow-hidden">
+							{/* Rotating border */}
+							{/* Rotating border */}
+							<svg
+								className="pointer-events-none absolute inset-0 h-full w-full"
+								preserveAspectRatio="none"
+								viewBox="0 0 100 100"
+							>
+								<rect
+									x="0"
+									y="0"
+									width="100"
+									height="100"
+									rx="4"
+									fill="none"
+									stroke="var(--primary-perfume)"
+									strokeWidth="0.35"
+									strokeDasharray="24 76"
+									pathLength="100"
+								>
+									<animate
+										attributeName="stroke-dashoffset"
+										from="100"
+										to="0"
+										dur="8s"
+										repeatCount="indefinite"
+									/>
+								</rect>
+							</svg>
+
+							{/* <div className="relative z-10"> */}
 							{/* {isSubmitted ? ( */}
 							{state.succeeded ? (
 								<div className="py-16 text-center space-y-4">
@@ -333,6 +364,7 @@ export default function ContactSection() {
 									</button>
 								</form>
 							)}
+							{/* </div> */}
 						</div>
 					</motion.div>
 				</div>

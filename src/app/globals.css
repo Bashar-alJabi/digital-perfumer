@@ -241,3 +241,14 @@ body {
 		cursor: none !important;
 	}
 } */
+
+/* 
+@keyframes contact-border-spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+} */
