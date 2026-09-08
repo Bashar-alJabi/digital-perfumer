@@ -158,13 +158,19 @@ export default function FormulaSection() {
 							</div>
 
 							{/* Neck */}
-							<div className="absolute left-1/2 top-17.5 z-20 h-13.75 w-27 -translate-x-1/2 rounded-t-md border-x border-black/10 bg-perfume-surface/80 backdrop-blur-sm">
+							<div
+								// className="absolute left-1/2 top-17.5 z-20 h-13.75 w-27 -translate-x-1/2 rounded-t-md border-x border-black/10 bg-perfume-surface/80 backdrop-blur-sm"
+								className="absolute left-1/2 top-17.5 z-20 h-13.75 w-27 -translate-x-1/2 rounded-t-md border-x border-black/10 bg-perfume-surface/80 md:backdrop-blur-sm"
+							>
 								<div className="absolute inset-x-3 top-3 h-px bg-black/10" />
 								<div className="absolute inset-x-3 top-7 h-px bg-black/5" />
 							</div>
 
 							{/* Bottle Body */}
-							<div className="absolute bottom-0 left-1/2 h-97.5 w-67.5 -translate-x-1/2 overflow-hidden rounded-[42px] border border-black/10 bg-perfume-surface/55 shadow-[0_30px_80px_rgba(243,99,113,0.12)] backdrop-blur-md md:h-111.25 md:w-[320px]">
+							<div
+								// className="absolute bottom-0 left-1/2 h-97.5 w-67.5 -translate-x-1/2 overflow-hidden rounded-[42px] border border-black/10 bg-perfume-surface/55 shadow-[0_30px_80px_rgba(243,99,113,0.12)] backdrop-blur-md md:h-111.25 md:w-[320px]"
+								className="absolute bottom-0 left-1/2 h-97.5 w-67.5 -translate-x-1/2 overflow-hidden rounded-[42px] border border-black/10 bg-perfume-surface/55 shadow-[0_30px_80px_rgba(243,99,113,0.12)] md:h-111.25 md:w-[320px] md:backdrop-blur-md"
+							>
 								{/* Glass highlight */}
 								<div className="absolute bottom-5 left-5 top-5 z-30 w-6 rounded-full bg-white/45 blur-[1px]" />
 
