@@ -100,7 +100,7 @@ export default function FormulaSection() {
 	return (
 		<section
 			ref={formulaRef}
-			className="relative min-h-[320vh] bg-perfume-bg px-6 py-32 text-perfume-text md:px-12 md:py-44"
+			className="relative min-h-[180vh] md:min-h-[320vh bg-perfume-bg px-6 py-32 text-perfume-text md:px-12 md:py-44"
 		>
 			<div className="sticky top-0 flex min-h-screen items-center">
 				<div className="w-full">
