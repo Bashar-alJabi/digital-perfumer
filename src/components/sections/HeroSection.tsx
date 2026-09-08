@@ -137,7 +137,7 @@ export default function HeroSection() {
 					</a>
 
 					<a
-						href="#projects"
+						href="#work"
 						className="px-7 py-3 rounded-full border border-perfume-text/20 text-perfume-text dp-small font-medium tracking-wider uppercase hover:border-perfume-primary hover:text-perfume-primary transition-all duration-300"
 					>
 						Explore My Work
